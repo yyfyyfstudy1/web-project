@@ -1,0 +1,66 @@
+
+.all-container{
+    width: 850px;
+    float: left;
+    
+}
+
+
+
+.author_container{
+    width: 300px;
+    float: left;
+    background-color: aqua;
+    margin-left: 30px;
+    height: 500px;
+}
+
+
+
+
+
+
+
+.big-container{
+    width: 800px;
+    height: 160px;
+    background-color: #F2F2F2;
+    float: left;
+    margin-top: 10px;
+    margin-left: 30px;
+    
+}
+
+.title{
+    
+    height: 30px;
+    
+}
+.left-img{
+    height: 100px;
+    width: 137px;
+    float: left;
+    margin-top: 10px;
+    
+   
+}
+
+.right-container{
+    height: 110px;
+    width: 600px;
+    margin-left: 20px;
+   padding-top: 10px;
+    float: left;
+    word-wrap:break-word
+}
+
+.content{
+    height: 65px;
+    width: 600px;
+    
+   
+}
+
+.likes{
+   
+}

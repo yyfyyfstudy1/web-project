@@ -6,6 +6,7 @@
                 <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
                 <link rel="stylesheet" href="<?php echo base_url(); ?>assets2/lib/layui/css/layui.css" />
                 <link rel="stylesheet" href="<?php echo base_url(); ?>assets2/lib/cropper/cropper.css" />
+                <link rel="stylesheet" href="<?php echo base_url(); ?>assets/my_css/file_common.css" />
             
         </head>
         <body>
