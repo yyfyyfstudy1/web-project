@@ -13,7 +13,8 @@
    
    <div id="result"  style="height:600px;width:800px;overflow: auto;background:#EEEEEE; margin:auto"></div>
 
-   <?php echo form_open(base_url().'Wechat/insert_record'); ?>
+   <?php $attributes = array('target' => 'nm_iframe');  ?>
+   <?php echo form_open(base_url().'Wechat/insert_record', $attributes); ?>
     <div style="width:800px; margin:auto" >
 
       <input type="text" class="form-control" placeholder="Say something" required="required" name="user_record">
@@ -26,6 +27,9 @@
   
 
      <?php echo form_close(); ?>
+
+
+     <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>  
      
   
   <div style="clear:both"></div>

@@ -23,8 +23,8 @@
               <textarea name="content"></textarea>
             </div>
           </div>
-            <div style="margin-left:200px;">
-          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="status" style="width: 900px;">
+            <div style="margin-left:150px;">
+          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="status" style="width: 1000px;">
             <option selected>Select release status</option>
             <option value="1">direct release</option>
             <option value="2">save to draft</option>
