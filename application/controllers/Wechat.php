@@ -140,16 +140,74 @@ public function insert_record()
     $this->load->view('template/header',$data_use);
   } 
     $this->load->model('ajaxsearch_model');
-  if($this->input->post('user_record'))
-  {
+
+
+
    $query = $this->input->post('user_record');
-  }
+  
+
+  
+
 //$data = $this->ajaxsearch_model->fetch_data($query);
     $username = $this->session->userdata('username');
 
     $date = date("Y/m/d");
   if ($query != NULL){
   $this->ajaxsearch_model->insert_wechat_record($username, $query, $date);
+ 
+  
+
+  }
+
+
+  $this->load->view('wechat');
+
+  $this->load->view('template/footer');
+
+
+}
+
+
+
+
+public function insert_robot_record()
+{   
+  
+  if(!$this->session->userdata('logged_in')){
+    $this->load->view('template/header');
+  }else{
+    $this->load->model('file_model');
+    $img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
+
+    $var = array();
+    foreach($img_name->result() as $row)
+         {
+         
+         $var[] = ''.base_url().'uploads_profile/'.$row->filename.'';
+ 
+         }
+    $data_use['error'] = $var;
+    $this->load->view('template/header',$data_use);
+  } 
+    $this->load->model('ajaxsearch_model');
+
+    //获取前台提交过来的机器人对话
+ 
+   $query2 = $this->input->post('robot_record');
+
+
+  //  $query = $this->input->post('user_record');
+  
+
+  
+
+//$data = $this->ajaxsearch_model->fetch_data($query);
+    $username = $this->session->userdata('username');
+
+    $date = date("Y/m/d");
+  if ($query2 != NULL){
+  // $this->ajaxsearch_model->insert_wechat_record($username, $query, $date);
+  $this->ajaxsearch_model->insert_wechat_record('robot', $query2, $date);
   
 
   }
