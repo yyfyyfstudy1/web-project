@@ -18,7 +18,7 @@
   
             <a href="<?php echo base_url(); ?>login" class="btn btn-light active"> Home </a>
           
-            <a href="<?php echo base_url(); ?>upload" class="btn btn-light"> upload</a>
+            <a href="<?php echo base_url(); ?>upload" class="btn btn-light"> publish</a>
        
             <a href="<?php echo base_url(); ?>load_img" class="btn btn-light"> private</a>
           

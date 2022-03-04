@@ -58,14 +58,9 @@ class file_common extends CI_Controller
 			
                     $username = $this->session->userdata('username');
                     $data = $this->file_model->print_common_img();
-                    $var = array();
-                    foreach($data->result() as $row)
-                    {
-			  	
-				    $var[] = $row->filename;
 
-			        }
-                    $data_use['img_src'] = $var;
+					$data_use['files'] = $data->result();
+
                     $data_use['user_name']= $username;
 
                     $this->load->view('file_common',$data_use );
