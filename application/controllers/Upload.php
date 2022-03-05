@@ -69,10 +69,11 @@ class Upload extends CI_Controller
             $this->load->view('template/footer');
         } else {
 			$title = $this->input->post('title');
+			$category = $this->input->post('category');
 			$content = $this->input->post('content');
 			$status = $this->input->post('status');
-
-			$this->file_model->upload($this->upload->data('file_name'), $this->upload->data('full_path'),$this->session->userdata('username'), $title, $content, $status);
+			
+			$this->file_model->upload($this->upload->data('file_name'), $this->upload->data('full_path'),$this->session->userdata('username'), $title, $content, $status, $category);
             if(!$this->session->userdata('logged_in')){
 				$this->load->view('template/header');
 			}else{

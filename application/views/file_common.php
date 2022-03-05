@@ -1,8 +1,24 @@
 <div class="row justify-content-center">
     <div class="form-group">
+ <!-- <h1>  Hello <font style="color:red; font-size :70px; "><?php echo $user_name ?></font>You can browse friends' pictures here</h1> -->
 
-    <h1>  Hello <font style="color:red; font-size :70px; "><?php echo $user_name ?></font>You can browse friends' pictures here</h1>
-    
+    <!-- 提交文章分类信息的表单 -->
+    <?php echo form_open(base_url().'File_common/filterData'); ?>
+    <div class="btn-group" role="group" aria-label="Basic outlined example" style="margin-left: 20px; margin-top:10px">
+    <button type="submit" class="btn btn-light" value="recommend" name="category"style="width:110px;  border-radius: 15px;">recommend</button>
+                    <button type="submit" class="btn btn-light" value="docker" name="category" style="width:80px; border-radius: 15px;margin-left:10px;">docker</button>
+                    <button type="submit" class="btn btn-light" value="java" name="category" style="width:80px; margin-left:10px;  border-radius: 15px;">java</button>
+                    <button type="submit" class="btn btn-light" value="python" name="category"style="width:80px; margin-left:10px;  border-radius: 15px;">python</button>
+                    <button type="submit" class="btn btn-light" value="cloud" name="category"style="width:80px; margin-left:10px;  border-radius: 15px;">cloud</button>
+                    <button type="submit" class="btn btn-light" value="java" name="category" style="width:80px; margin-left:10px;  border-radius: 15px;">java</button>
+                    <button type="submit" class="btn btn-light" value="python" name="category"style="width:80px; margin-left:10px;  border-radius: 15px;">python</button>
+                    <button type="submit" class="btn btn-light" value="cloud" name="category"style="width:80px; margin-left:10px;  border-radius: 15px;">cloud</button>
+                    
+    </div>      
+         
+    <?php echo form_close(); ?>
+
+
     <div class="all-container">
     <?php echo form_open(base_url().'comment_page'); ?> 
      

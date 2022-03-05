@@ -3,7 +3,7 @@
  class File_model extends CI_Model{
 
     // upload file
-    public function upload($filename, $path, $username, $title, $content, $status){
+    public function upload($filename, $path, $username, $title, $content, $status, $category){
 
         $data = array(
             'filename' => $filename,
@@ -11,7 +11,8 @@
             'username' => $username,
             'post'=> $status,
             'title'=> $title,
-            'content' => $content
+            'content' => $content,
+            'category' => $category
         );
         $query = $this->db->insert('files', $data);
 
@@ -64,7 +65,18 @@
     }
 
 
-    function print_common_img()
+    function print_common_img($category)
+    {
+        $this->db->select("*");
+        $this->db->from("files");
+        $this->db->like('post', 'yes');
+        $this->db->like('category', $category);
+        // $this->db->like('username', $username);
+        return $this->db->get();
+        
+    }
+
+    function print_common_img2()
     {
         $this->db->select("*");
         $this->db->from("files");

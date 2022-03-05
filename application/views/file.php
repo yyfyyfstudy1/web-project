@@ -13,6 +13,21 @@
               <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" />
             </div>
           </div>
+
+          <!-- 文章分类 -->
+          <!-- 第二行 -->
+          <div class="layui-form-item">
+            <label class="layui-form-label">文章类别</label>
+            <select class="form-select" aria-label="Default select example" style="width: 500px; float:left; margin-left:30px" name="category">
+              <option selected>Select article category</option>
+              <option value="docker">Docker</option>
+              <option value="java">Java</option>
+              <option value="python">Python</option>
+              <option value="cloud">Cloud</option>
+            </select>
+          </div>
+
+
           <!-- 第三行 -->
           <div class="layui-form-item">
             <!-- 左侧的 label -->
