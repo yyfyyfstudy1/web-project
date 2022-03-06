@@ -133,5 +133,40 @@
     $this -> db -> update ( 'files' ,  $array ); 
 
     }
+
+    //定义插入点赞信息的函数
+
+    public function likes_add($likes_id){
+
+        $this->db->set('user_likes', 'user_likes+1',false);
+        $this->db->where('id', $likes_id);
+        $this->db->update('files');
+    }
+
+
+    public function insert_llike($username, $likes_id){
+
+        $data = array(
+            'username' => $username,
+            'likes_file' => $likes_id
+    );
+    
+    $this->db->insert('user_likes', $data);
+    }
+
+
+    //判断用户是否点赞的函数
+    public function if_likes($username, $likes_id){
+        $this->db->where('username', $username);
+        $this->db->where('likes_file', $likes_id);
+        $result = $this->db->get('user_likes');
+
+        if($result->num_rows() == 1){
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
 }
 

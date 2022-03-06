@@ -18,9 +18,28 @@
          
     <?php echo form_close(); ?>
 
+    <?php 
+    
+        if($if_likes==0){
+            echo
+            '
+            <div class="alert alert-danger d-flex align-items-center" role="alert" style="margin-top:20px">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div>
+            You have already liked this post
+            </div>
+          </div>
+            
+            
+            ';
+        }
+    
+    
+    ?>
 
-    <div class="all-container">
-    <?php echo form_open(base_url().'comment_page'); ?> 
+
+    <div class="all-container" id="ratings">
+   
      
     <?php 
 
@@ -62,10 +81,10 @@
 
         echo '
         
-        <a href="'.$url.'">
         
         
-    <div class="big-container">
+    <div class="big-container" >
+    <a href="'.$url.'">
         <div class="title">
         <p>
         <font size="3">
@@ -76,10 +95,12 @@
         </p>
        
         </div>
+   
         <div class="left-img">
              <img src = "'.base_url().'uploads/'. $file->filename.'" width="137px" height="100px">
         
         </div>
+    </a>
         <div class="right-container">
             <div class="content">
                 <font size="2" color="gray">
@@ -90,22 +111,29 @@
             </div>
             
             <div class="likes">
+                <form action="'.base_url().'File_common/userLikes" method="post" id="submitableimag'.$file->id.'">
+                <input  name="Ilikes" type="hidden" value="'.$file->id.'">
+                <image src="'.base_url().'assets/img/赞.png" width="30px" height="30px" style="float:left" class="rateButton" id="submitableimag'.$file->id.'"></image>
+    
+                <p style="margin-left: 7px; float:left; margin-top:5px">'.$file->user_likes.'<p>
+                </form>
 
-                <image src="'.base_url().'assets/img/赞.png" width="30px" height="30px" style="float:left"></image>
-                <p style="margin-left: 7px; float:left; margin-top:5px">33<p>
-                <image src="'.base_url().'assets/img/踩.png" width="25px" height="25px" style="margin-left: 40px;margin-top:5px; float:left"></image>
-                <p style="margin-left: 7px; float:left; margin-top:5px">33<p>
 
+
+              <form action="'.base_url().'File_common/userLikes" method="post" name="LikeForm" >
+                <input  name="dislikes" type="hidden" value='.$file->id.'>
+                <image src="'.base_url().'assets/img/踩.png" width="25px" height="25px" style="margin-left: 40px;margin-top:5px; float:left" id="submitableimag"></image>
+                <p style="margin-left: 7px; float:left; margin-top:5px">'.$file->dislikes.'<p>
+               
                 <p style="margin-left: 27px; float:left; margin-top:5px">'.$file->username.'<p>
+                </form>
             </div>
         
         </div>
         
     </div>
     
-    </a>
-     
-        
+          
         
         ';
         
@@ -115,8 +143,7 @@
     ?>
 
        
-    
-    <?php echo form_close(); ?>
+
     </div>
     <div class ="author_container">
     11111111
@@ -124,6 +151,18 @@
     </div>
 
     </div>
-    
 </div>
 
+<script>
+    $('#ratings').on('click', '.rateButton', function(e){
+        console.log($(this).attr('id'))
+        let formId = $(this).attr('id')
+        
+        $('#'+formId).submit();
+    });
+    
+   $('#submitableimag').click(function(){
+       console.log('11111')
+      $('#myform').submit();
+   });
+</script>
