@@ -23,11 +23,13 @@
         if($if_likes==0){
             echo
             '
-            <div class="alert alert-danger d-flex align-items-center" role="alert" style="margin-top:20px">
+            <div id="alert_div">
+            <div class="alert alert-danger d-flex align-items-center" role="alert" style="margin-top:20px" >
             <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
             <div>
             You have already liked this post
             </div>
+          </div>
           </div>
             
             
@@ -165,4 +167,18 @@
        console.log('11111')
       $('#myform').submit();
    });
+
+   var timer;
+
+    $(function () {
+
+    timer=setTimeout(function () {
+
+    $("#alert_div").hide();
+
+    }, 2000);
+
+    })
+
+
 </script>

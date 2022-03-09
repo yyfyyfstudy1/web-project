@@ -116,6 +116,7 @@ class file_common extends CI_Controller
 						}
 						$data_use['img_src'] = $var;
 						$data_use['user_name']= $username;
+						$data_use['if_likes'] = 1;
 	
 						$this->load->view('file_common',$data_use ); //if user already logined show upload page
 	
@@ -137,6 +138,7 @@ class file_common extends CI_Controller
 						$data_use['files'] = $data->result();
 	
 						$data_use['user_name']= $username;
+						$data_use['if_likes'] = 1;
 	
 						$this->load->view('file_common',$data_use );
 	
