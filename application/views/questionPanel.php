@@ -1,6 +1,6 @@
 <div class="left-container">
     <div class="button-group">
-    <button class="btn btn-primary" type="submit" style="width:170px">New Thread</button>
+    <button class="btn btn-primary" type="submit" style="width:170px" id="showHidden">New Thread</button>
     <h5 style="width:100px;  margin-top:15px; color:gray; font-weight:bold">CATEGORIES</h5>
     <button type="button" class="btn btn-outline-primary"  style="width:120px; margin-top:15px">General</button>
     <button type="button" class="btn btn-outline-primary" style="width:120px; margin-top:20px">Lectures</button>
@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div style='width:1px;border:1px solid gray;float:left;height:1700px;'><!--这个div模拟一条红色的垂直分割线--></div>
+<div style='width:1px;border:1px solid gray;float:left;height:1100px;'><!--这个div模拟一条红色的垂直分割线--></div>
 <div class="middle-container">
     <!-- 搜索框 -->
     <div class="input-group mb-3">
@@ -21,21 +21,6 @@
     <!-- 问题面板 -->
     <div class="question_container">
 
-        <div class="question">
-            <div class="question_title">which software should we install ?</div>
-            <div class="question_info">
-               <p style="float: left; color:blue;font-size:13px">General</p>
-               <p style="float: left; color:gray; font-size:13px; margin-left:10px">Yifan YU</p>
-               <div style="float: left; background-color:yellow; margin-left:10px">
-               <p style="font-size:13px;">staff</p>
-               </div>
-
-               <p style="float: left; font-size:13px;margin-left:10px">12d</p>
-
-            </div>
-           
-        </div>
-        <hr class="hr-double"/>
 
         <div class="question">
             <div class="question_title">which software should we install ?</div>
@@ -69,74 +54,7 @@
         </div>
         <hr class="hr-double"/>
 
-        <div class="question">
-            <div class="question_title">which software should we install ?</div>
-            <div class="question_info">
-               <p style="float: left; color:blue;font-size:13px">General</p>
-               <p style="float: left; color:gray; font-size:13px; margin-left:10px">Yifan YU</p>
-               <div style="float: left; background-color:yellow; margin-left:10px">
-               <p style="font-size:13px;">staff</p>
-               </div>
-
-               <p style="float: left; font-size:13px;margin-left:10px">12d</p>
-
-            </div>
-           
-        </div>
-        <hr class="hr-double"/>
-
-        <div class="question">
-            <div class="question_title">which software should we install ?</div>
-            <div class="question_info">
-               <p style="float: left; color:blue;font-size:13px">General</p>
-               <p style="float: left; color:gray; font-size:13px; margin-left:10px">Yifan YU</p>
-               <div style="float: left; background-color:yellow; margin-left:10px">
-               <p style="font-size:13px;">staff</p>
-               </div>
-
-               <p style="float: left; font-size:13px;margin-left:10px">12d</p>
-
-            </div>
-           
-        </div>
-        <hr class="hr-double"/>
-
-        <div class="question">
-            <div class="question_title">which software should we install ?</div>
-            <div class="question_info">
-               <p style="float: left; color:blue;font-size:13px">General</p>
-               <p style="float: left; color:gray; font-size:13px; margin-left:10px">Yifan YU</p>
-               <div style="float: left; background-color:yellow; margin-left:10px">
-               <p style="font-size:13px;">staff</p>
-               </div>
-
-               <p style="float: left; font-size:13px;margin-left:10px">12d</p>
-
-            </div>
-           
-        </div>
-        <hr class="hr-double"/>
-
-
-
-        <div class="question">
-            <div class="question_title">which software should we install ?</div>
-            <div class="question_info">
-               <p style="float: left; color:blue;font-size:13px">General</p>
-               <p style="float: left; color:gray; font-size:13px; margin-left:10px">Yifan YU</p>
-               <div style="float: left; background-color:yellow; margin-left:10px">
-               <p style="font-size:13px;">staff</p>
-               </div>
-
-               <p style="float: left; font-size:13px;margin-left:10px">12d</p>
-
-            </div>
-           
-        </div>
-        <hr class="hr-double"/>
-
-    
-
+     
 
     
        
@@ -146,8 +64,9 @@
 </div>
 
 
-<div style='width:1px;border:1px solid gray;float:left;height:1700px;'><!--这个div模拟一条红色的垂直分割线--></div>
-<div class="right-container">
+<div style='width:1px;border:1px solid gray;float:left;height:1100px;'><!--这个div模拟一条红色的垂直分割线--></div>
+
+<div class="right-container" id="div1" style="display:block">
     <div class="title">
         <h2>which software should we install ?</h2>
     </div>
@@ -187,9 +106,10 @@ Kind regards,</p>
     </div>
     <div class="rich_text">
         <!-- 富文本编辑器 -->
+        <textarea name="content"></textarea>
 
     </div>
-    <div style="float: right; margin-top:7px">
+    <div style="float: right; margin-top:15px">
     <button class="btn btn-primary" type="submit">Submit</button>
     </div>
     
@@ -197,6 +117,99 @@ Kind regards,</p>
 
 </div>
 
-<!-- 富文本 -->
-<script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymce.min.js"></script>
-<script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymce_setup.js"></script>
+<!-- 发布问题的样式 -->
+
+<?php echo form_open_multipart('upload/do_upload');?>
+
+<div id="div2" style="display:none" class="post_container">
+
+    <div style="margin-top: 20px;"><h2>&nbspNew Question</h2></div>
+    
+    <div class="row mb-3" style="margin-top: 20px;">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">title</label>
+        <div class="col-sm-10">
+        <input type="text" class="form-control" name="title">
+        </div>
+    </div>
+
+     
+    <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Category</label>
+        <div class="col-sm-10">
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <input type="button" class="btn btn-primary" style="border-radius:15px;" value="general"></input>
+            <input type="button" class="btn btn-success" style="margin-left:10px; border-radius:15px" value="Lectures"></input>
+            <input type="button" class="btn btn-danger" style="margin-left:10px; border-radius:15px" value="Prac"></input>
+            <input type="button" class="btn btn-warning" style="margin-left:10px; border-radius:15px" value="Quiz"></input>
+            <input type="button" class="btn btn-info" style="margin-left:10px; border-radius:15px" value="Assignment"></input>
+            </div>
+        </div>
+    </div>
+    <div class="rich_text2">
+        <!-- 富文本编辑器 -->
+        <textarea name="content"></textarea>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="margin-left: 590px; margin-top:10px">Post</button>
+
+
+
+</div>
+<?php echo form_close(); ?>
+
+
+
+
+
+
+
+
+
+
+
+<script type='text/javascript'>
+        function show_hidden(obj) {
+
+            if (obj.style.display == 'block') {
+
+                obj.style.display = 'none';
+
+            } else {
+
+                obj.style.display = 'block';
+
+            }
+
+        }
+
+        var sh = document.getElementById("showHidden");
+
+        sh.onclick = function () {
+
+            var div1 = document.getElementById("div1");
+
+            var div2 = document.getElementById("div2");
+
+            show_hidden(div1);
+
+            show_hidden(div2);
+
+            return false;
+
+        }
+    </script>
+
+   <!-- 导入第三方的 JS 插件 -->
+   <script src="<?php echo base_url(); ?>assets2/lib/layui/layui.all.js"></script>
+    <script src="<?php echo base_url(); ?>assets2/lib/jquery.js"></script>
+    <!-- 导入 art-template -->
+    <script src="<?php echo base_url(); ?>assets2/lib/template-web.js"></script>
+    <!-- 富文本 -->
+    <script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymce.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymce_setup.js"></script>
+    <!-- 导入 cropper 相关的脚本 -->
+    <script src="<?php echo base_url(); ?>assets2/lib/cropper/Cropper.js"></script>
+    <script src="<?php echo base_url(); ?>assets2/lib/cropper/jquery-cropper.js"></script>
+    <!-- 导入自己的 JS -->
+    <script src="<?php echo base_url(); ?>assets2/lib/art_pub.js"></script>

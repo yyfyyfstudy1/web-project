@@ -122,9 +122,16 @@
 }
 .rich_text{
     float: left;
-    height: 200px;
     width: 600px;
-    background-color: blueviolet;
     margin-top: 20px;
+    background-color: blueviolet;
+    
+}
+
+
+.rich_text2{
+    float: left;
+    width: 625px;
+    margin-left: 20px;
 }
 
