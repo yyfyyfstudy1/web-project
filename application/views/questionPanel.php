@@ -118,8 +118,16 @@ Kind regards,</p>
 </div>
 
 <!-- 发布问题的样式 -->
+<script>
+function myFunction(content)
+{
 
-<?php echo form_open_multipart('upload/do_upload');?>
+    $("#hidden_input").attr("value",content);
+
+}
+</script>
+
+<?php echo form_open_multipart('QuestionPanel/question_upload');?>
 
 <div id="div2" style="display:none" class="post_container">
 
@@ -137,11 +145,15 @@ Kind regards,</p>
         <label for="inputEmail3" class="col-sm-2 col-form-label">Category</label>
         <div class="col-sm-10">
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-            <input type="button" class="btn btn-primary" style="border-radius:15px;" value="general"></input>
-            <input type="button" class="btn btn-success" style="margin-left:10px; border-radius:15px" value="Lectures"></input>
-            <input type="button" class="btn btn-danger" style="margin-left:10px; border-radius:15px" value="Prac"></input>
-            <input type="button" class="btn btn-warning" style="margin-left:10px; border-radius:15px" value="Quiz"></input>
-            <input type="button" class="btn btn-info" style="margin-left:10px; border-radius:15px" value="Assignment"></input>
+
+
+            <input type="button" class="btn btn-primary" style="border-radius:15px;" value="general" onclick="myFunction('general')" ></input>
+            <input type="button" class="btn btn-success" style="margin-left:10px; border-radius:15px" value="Lectures" onclick="myFunction('Lectures')" ></input>
+            <input type="button" class="btn btn-danger" style="margin-left:10px; border-radius:15px" value="Prac" onclick="myFunction('Prac')" ></input>
+            <input type="button" class="btn btn-warning" style="margin-left:10px; border-radius:15px" value="Quiz" onclick="myFunction('Quiz')" ></input>
+            <input type="button" class="btn btn-info" style="margin-left:10px; border-radius:15px" value="Assignment" onclick="myFunction('Assignment')" ></input>
+
+            <input type="hidden" value="" id="hidden_input" name="category" >
             </div>
         </div>
     </div>
@@ -157,10 +169,6 @@ Kind regards,</p>
 
 </div>
 <?php echo form_close(); ?>
-
-
-
-
 
 
 
@@ -198,6 +206,8 @@ Kind regards,</p>
             return false;
 
         }
+
+        
     </script>
 
    <!-- 导入第三方的 JS 插件 -->

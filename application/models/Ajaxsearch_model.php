@@ -45,7 +45,7 @@ class Ajaxsearch_model extends CI_Model
       'record' => $record,
       'time' => $date
   );
-  $query = $this->db->insert('wechat', $data);
+  $this->db->insert('wechat', $data);
 
 }
 

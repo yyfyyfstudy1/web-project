@@ -168,5 +168,21 @@
         }
         
     }
+
+    // 用户提问插入的函数
+    public function userPostQuestion($queTitle, $queCategory, $queContent, $userName){
+         $pub_time = date('Y-m-d H:i:s');
+         $data = array(
+            'queTitle' => $queTitle,
+            'queCategory' => $queCategory,
+            'queContent' => $queContent,
+            'pubTime' => $pub_time,
+            'userName' => $userName
+
+        );
+         $this->db->insert('question', $data);
+        
+    }
+
 }
 

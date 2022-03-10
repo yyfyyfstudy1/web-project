@@ -41,14 +41,8 @@ class QuestionPanel extends CI_Controller
     }
 
     public function question_upload() {
-		$this->load->model('file_model');
-        $config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'jpg|mp4|mkv|png';
-		$config['max_size'] = 20000;
-		$config['max_width'] = 3024;
-		$config['max_height'] = 5768;
-		$this->load->library('upload', $config);
-		if ( ! $this->upload->do_upload('userfile')) {
+			$this->load->model('file_model');	
+			
             if(!$this->session->userdata('logged_in')){
 				$this->load->view('template/header');
 			}else{
@@ -65,36 +59,18 @@ class QuestionPanel extends CI_Controller
 				$data_use['error'] = $var;
 				$this->load->view('template/header',$data_use);
 			}
-            $data = array('error' => $this->upload->display_errors());
-            $this->load->view('file', $data);
-            $this->load->view('template/footer');
-        } else {
+
+
 			$title = $this->input->post('title');
 			$category = $this->input->post('category');
 			$content = $this->input->post('content');
-			$status = $this->input->post('status');
-			
-			$this->file_model->upload($this->upload->data('file_name'), $this->upload->data('full_path'),$this->session->userdata('username'), $title, $content, $status, $category);
-            if(!$this->session->userdata('logged_in')){
-				$this->load->view('template/header');
-			}else{
-				$this->load->model('file_model');
-				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
-	
-				$var = array();
-				foreach($img_name->result() as $row)
-					   {
-						 
-					   $var[] = ''.base_url().'uploads_profile/'.$row->filename.'';
-	   
-					   }
-				$data_use['error'] = $var;
-				$this->load->view('template/header',$data_use);
-			}
-			$links = $this->upload->data('file_name');
-            $this->load->view('file', array('error' =>$links));
+			$username = $this->session->userdata('username');
+
+			$this->file_model->userPostQuestion($title, $category, $content, $username);
+
+            $this->load->view('questionPanel');
             $this->load->view('template/footer');
-        }
+        
 	}
 
 

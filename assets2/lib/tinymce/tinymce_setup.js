@@ -29,6 +29,8 @@ function initEditor() {
        forecolor emoticons |\
        codesample fontsizeselect |\
        imageupload',
+
+    images_upload_url: '/demo/upimg.php',
     //字体大小
     fontsize_formats: '10pt 12pt 14pt 18pt 24pt 36pt',
     //按tab不换行

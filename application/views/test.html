@@ -1,51 +1,19 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-
-</head>
-
 <body>
+<script>
+function myFunction(type,content)
+{
+document.getElementById(type).innerHTML = content;
+}
+</script>
+ 
+<p>
+<span id="product_first">请选择</span>
+<input type="button" value="选择" onclick="myFunction('product_first','general')" >
 
-    <button type="button" id="showHidden">点击切换div的隐藏与显示</button>
+</p>
 
-    <div id="div1" style="display:block">请叫我第一层</div>
-
-    <div id="div2" style="display:none">请叫我第二层</div>
-
-    <script type='text/javascript'>
-        function show_hidden(obj) {
-
-            if (obj.style.display == 'block') {
-
-                obj.style.display = 'none';
-
-            } else {
-
-                obj.style.display = 'block';
-
-            }
-
-        }
-
-        var sh = document.getElementById("showHidden");
-
-        sh.onclick = function () {
-
-            var div1 = document.getElementById("div1");
-
-            var div2 = document.getElementById("div2");
-
-            show_hidden(div1);
-
-            show_hidden(div2);
-
-            return false;
-
-        }
-    </script>
-
+ 
 </body>
-
 </html>
