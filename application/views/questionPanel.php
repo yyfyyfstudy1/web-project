@@ -49,12 +49,14 @@
             if($date == 0 and $hour >0 ){
                 $Intervals_time = strval($hour) . ' h';
             }
-            if($date == 0 and $hour == 0 and $minute >1){
-                $Intervals_time = strval($minute) . ' minute';
-            }
+            
            
             if($date == 0 and $hour == 0 and $minute <1){
                 $Intervals_time = 'just now';
+            }
+
+            if($date == 0 and $hour == 0 and $minute >=1){
+                $Intervals_time = strval($minute) . ' minute';
             }
 
         echo '
