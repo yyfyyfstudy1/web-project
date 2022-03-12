@@ -2,11 +2,16 @@
     <div class="button-group">
     <button class="btn btn-primary" type="submit" style="width:170px" id="showHidden">New Thread</button>
     <h5 style="width:100px;  margin-top:15px; color:gray; font-weight:bold">CATEGORIES</h5>
-    <button type="button" class="btn btn-outline-primary"  style="width:120px; margin-top:15px">General</button>
-    <button type="button" class="btn btn-outline-primary" style="width:120px; margin-top:20px">Lectures</button>
-    <button type="button" class="btn btn-outline-primary" style="width:120px; margin-top:20px">Prac</button>
-    <button type="button" class="btn btn-outline-primary" style="width:120px; margin-top:20px">Quizzes</button>
-    <button type="button" class="btn btn-outline-primary" style="width:120px; margin-top:20px">Assignments</button>
+    <?php echo form_open(base_url().'QuestionPanel/filterQuestion'); ?>
+
+    <button type="submit" class="btn btn-outline-primary"  value="general" name="category_filter" style="width:120px; margin-top:15px">General</button>
+    <button type="submit" class="btn btn-outline-primary"  value="Lectures" name="category_filter" style="width:120px; margin-top:20px">Lectures</button>
+    <button type="submit" class="btn btn-outline-primary" value="Prac" name="category_filter" style="width:120px; margin-top:20px">Prac</button>
+    <button type="submit" class="btn btn-outline-primary" value="Quize" name="category_filter" style="width:120px; margin-top:20px">Quizzes</button>
+    <button type="submit" class="btn btn-outline-primary" value="Assignment" name="category_filter" style="width:120px; margin-top:20px">Assignments</button>
+
+    <?php echo form_close(); ?>
+
     </div>
 </div>
 
@@ -21,42 +26,30 @@
     <!-- 问题面板 -->
     <div class="question_container">
 
-
+        <?php 
+        
+        foreach($files as $file){
+        echo '
         <div class="question">
-            <div class="question_title">which software should we install ?</div>
+            <div class="question_title">'.$file->queTitle.'</div>
             <div class="question_info">
-               <p style="float: left; color:blue;font-size:13px">General</p>
-               <p style="float: left; color:gray; font-size:13px; margin-left:10px">Yifan YU</p>
+               <p style="float: left; color:blue;font-size:13px">'.$file->queCategory.'</p>
+               <p style="float: left; color:gray; font-size:13px; margin-left:10px">'.$file->userName.'</p>
                <div style="float: left; background-color:yellow; margin-left:10px">
-               <p style="font-size:13px;">staff</p>
+               <p style="font-size:13px;">'.$file->staff.'</p>
                </div>
 
-               <p style="float: left; font-size:13px;margin-left:10px">12d</p>
+               <p style="float: left; font-size:13px;margin-left:10px">'.$file->pubTime.'</p>
 
             </div>
            
         </div>
         <hr class="hr-double"/>
 
-        <div class="question">
-            <div class="question_title">which software should we install ?</div>
-            <div class="question_info">
-               <p style="float: left; color:blue;font-size:13px">General</p>
-               <p style="float: left; color:gray; font-size:13px; margin-left:10px">Yifan YU</p>
-               <div style="float: left; background-color:yellow; margin-left:10px">
-               <p style="font-size:13px;">staff</p>
-               </div>
 
-               <p style="float: left; font-size:13px;margin-left:10px">12d</p>
-
-            </div>
-           
-        </div>
-        <hr class="hr-double"/>
-
-     
-
-    
+        ';
+        }
+        ?>
        
     </div>
 

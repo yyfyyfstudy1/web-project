@@ -30,6 +30,8 @@
             <a href="<?php echo base_url(); ?>file_common" class="btn btn-light"> gallery</a>
        
             <a href="<?php echo base_url(); ?>Wechat" class="btn btn-light"> chat room</a>
+
+            <a href="<?php echo base_url(); ?>QuestionPanel" class="btn btn-light"> Question Board</a>
         
         
   </div>

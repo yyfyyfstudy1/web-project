@@ -171,18 +171,35 @@
 
     // 用户提问插入的函数
     public function userPostQuestion($queTitle, $queCategory, $queContent, $userName){
-         $pub_time = date('Y-m-d H:i:s');
+        date_default_timezone_set('Asia/Shanghai');
          $data = array(
             'queTitle' => $queTitle,
             'queCategory' => $queCategory,
             'queContent' => $queContent,
-            'pubTime' => $pub_time,
+            'pubTime' => date('Y-m-d H:i:s'),
             'userName' => $userName
 
         );
          $this->db->insert('question', $data);
         
     }
+
+
+    // 获取用户提问列表的函数
+    public function takePostQuestion($category){
+        $this->db->select("*");
+        $this->db->from("question");
+        $this->db->join('users', 'users.username = question.userName');
+        $this->db->order_by('queId', 'DESC');
+        if($category==1){
+            return $this->db->get();
+        }
+        $this->db->like('queCategory', $category);
+        // $this->db->like('username', $username);
+        return $this->db->get();
+       
+   }
+
 
 }
 
