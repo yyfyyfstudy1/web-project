@@ -39,7 +39,6 @@ class QuestionPanel extends CI_Controller
 		}else{
 			$this->load->model('file_model');
 			$data = $this->file_model->takePostQuestion(1);
-			
 			$data_use['files'] = $data->result();
 	
 			// 把问题的内容传递给前端页面

@@ -27,8 +27,36 @@
     <div class="question_container">
 
         <?php 
+
+
         
         foreach($files as $file){
+
+
+            // 获取时间差 
+            date_default_timezone_set("Asia/Shanghai");
+            $startdate=$file->pubTime;
+            $enddate=date('Y-m-d H:i:s');
+            $date=floor((strtotime($enddate)-strtotime($startdate))/86400);
+            $hour=floor((strtotime($enddate)-strtotime($startdate))%86400/3600);
+            $minute=floor((strtotime($enddate)-strtotime($startdate))%86400/60);
+            
+            // $second=floor((strtotime($enddate)-strtotime($startdate))%86400%60);
+            //逆天，居然不是用 +
+            if($date !== 0){
+                $Intervals_time = strval($date) . ' d';
+            }
+            if($date == 0 and $hour >0 ){
+                $Intervals_time = strval($hour) . ' h';
+            }
+            if($date == 0 and $hour == 0 and $minute >1){
+                $Intervals_time = strval($minute) . ' minute';
+            }
+           
+            if($date == 0 and $hour == 0 and $minute <1){
+                $Intervals_time = 'just now';
+            }
+
         echo '
         <div class="question">
             <div class="question_title">'.$file->queTitle.'</div>
@@ -39,7 +67,7 @@
                <p style="font-size:13px;">'.$file->staff.'</p>
                </div>
 
-               <p style="float: left; font-size:13px;margin-left:10px">'.$file->pubTime.'</p>
+               <p style="float: left; font-size:13px;margin-left:10px">'.$Intervals_time.'</p>
 
             </div>
            
