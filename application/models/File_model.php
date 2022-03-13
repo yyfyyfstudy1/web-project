@@ -40,7 +40,7 @@
         return $this->db->get();
         
     }
-
+    //需要进行重构的函数
     public function user_pic($filename, $path, $username){
 
         $data = array(
@@ -52,7 +52,7 @@
 
     }
 
-
+     //需要进行重构的函数
     function print_img_profile($username)
     {
         $this->db->select("*");
@@ -195,6 +195,17 @@
             return $this->db->get();
         }
         $this->db->like('queCategory', $category);
+        // $this->db->like('username', $username);
+        return $this->db->get();
+       
+   }
+
+    //  获取指定问题内容的函数
+    public function showQuestion($id){
+        $this->db->select("*");
+        $this->db->from("question");
+        $this->db->join('users', 'users.username = question.userName');
+        $this->db->like('queId', $id);
         // $this->db->like('username', $username);
         return $this->db->get();
        

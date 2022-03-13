@@ -67,7 +67,7 @@ class QuestionPanel extends CI_Controller
 				$this->load->view('template/header',$data_use);
 			}
 
-
+			$category = $this->input->post('category_filter');
 			$title = $this->input->post('title');
 			$category = $this->input->post('category');
 			$content = $this->input->post('content');
@@ -75,8 +75,10 @@ class QuestionPanel extends CI_Controller
 
 			$this->file_model->userPostQuestion($title, $category, $content, $username);
 
+			// 先从cookie里获取分类的信息
+			$category = get_cookie('category');
 
-			$data = $this->file_model->takePostQuestion(1);
+			$data = $this->file_model->takePostQuestion($category);
 			
 			$data_use['files'] = $data->result();
 	
@@ -113,6 +115,8 @@ class QuestionPanel extends CI_Controller
 
 
 			$category = $this->input->post('category_filter');
+			// 设置一个cookie暂时保存分类的值
+			set_cookie("category", $category, '3000');
 		
 
 			$data = $this->file_model->takePostQuestion($category);
@@ -123,6 +127,49 @@ class QuestionPanel extends CI_Controller
 			$this->load->view('questionPanel',$data_use); 
 
             $this->load->view('template/footer');
+	}
+
+
+	//定义右侧问题展示的函数
+	public function showQuestion(){
+		
+		$this->load->model('file_model');	
+			
+            if(!$this->session->userdata('logged_in')){
+				$this->load->view('template/header');
+			}else{
+				$this->load->model('file_model');
+				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
+	
+				$var = array();
+				foreach($img_name->result() as $row)
+					   {
+						 
+					   $var[] = ''.base_url().'uploads_profile/'.$row->filename.'';
+	   
+					   }
+				$data_use['error'] = $var;
+				$this->load->view('template/header',$data_use);
+			}
+
+
+			$ID = $this->input->post('queId');
+
+			// 先从cookie里获取分类的信息
+			$category = get_cookie('category');
+			
+			$data = $this->file_model->takePostQuestion($category);
+
+			$data2 = $this->file_model->showQuestion($ID);
+
+			
+			$data_use['files'] = $data->result();
+			$data_use['files2'] = $data2->result();
+	
+			// 把问题的内容传递给前端页面
+			$this->load->view('questionPanel', $data_use); 
+
+            // $this->load->view('template/footer');
 	}
 
 

@@ -24,7 +24,7 @@
     </div>
 
     <!-- 问题面板 -->
-    <div class="question_container">
+    <div class="question_container" id="ratings">
 
         <?php 
 
@@ -60,6 +60,8 @@
             }
 
         echo '
+        <form action="'.base_url().'QuestionPanel/showQuestion" method="post" id="submitableimag'.$file->queId.'">
+        <div class="rateButton" id="submitableimag'.$file->queId.'">
         <div class="question">
             <div class="question_title">'.$file->queTitle.'</div>
             <div class="question_info">
@@ -70,11 +72,14 @@
                </div>
 
                <p style="float: left; font-size:13px;margin-left:10px">'.$Intervals_time.'</p>
-
+               <input  name="queId" type="hidden" value='.$file->queId.'>
+              
             </div>
            
         </div>
+        </div>
         <hr class="hr-double"/>
+        </form>
 
 
         ';
@@ -89,28 +94,28 @@
 
 <div style='width:1px;border:1px solid gray;float:left;height:1100px;'><!--这个div模拟一条红色的垂直分割线--></div>
 
-<div class="right-container" id="div1" style="display:block">
+
+
+<?php 
+
+        if(isset($files2)){
+
+
+            foreach ($files2 as $file2){
+               
+                echo '
+                
+                       
+                <div class="right-container" id="div1" style="display:block">
     <div class="title">
-        <h2>which software should we install ?</h2>
+        <h2>'.$file2->queTitle.'</h2>
     </div>
     <div class="questionerInfo">
         <image src="http://n.sinaimg.cn/translate/w402h363/20180213/bg7r-fyrpeie1413753.jpg" class="questionerAvater"></image>
-        <div class="questionerName">Yifan Yu</div>
+        <div class="questionerName">'.$file2->userName.'</div>
     </div>
     <div class="question_content">
-        <p style="font-size: 18px;">Dear all
-
-Welcome to [INFS3202/7202] Web Information Systems (St Lucia & external). Semester 1, 2022, Flexible Delivery.
-
-
-We are looking forward to working with you this semester as we explore this subject.
-
-To get started in this course, please read the Course Profile (ECP). The ECP will give you an overview of the aims, learning activities and assessment for this course. Make sure you check your timetable to know when and where to attend your classes.
-
-This is a 2-unit course, a total workload of approximately 10 - 12 hours per week (including class contact time) is expected for satisfactory progress.
-
-
-Kind regards,</p>
+    '.$file2->queContent.'
     </div>
 
     <div class="test">
@@ -139,8 +144,23 @@ Kind regards,</p>
 
 
 </div>
+                
+                
+                ';
 
-<!-- 发布问题的样式 -->
+    
+            }
+
+        }
+        
+        
+
+?>
+
+
+
+
+
 <script>
 function myFunction(content)
 {
@@ -229,6 +249,16 @@ function myFunction(content)
             return false;
 
         }
+
+
+        // 通过代理获取相应的div，提交相应的表单
+    $('#ratings').on('click', '.rateButton', function(e){
+        console.log($(this).attr('id'))
+        let formId = $(this).attr('id')
+        
+        $('#'+formId).submit();
+    });
+    
 
         
     </script>

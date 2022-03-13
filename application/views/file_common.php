@@ -156,12 +156,14 @@
 </div>
 
 <script>
+    // 通过代理获取相应的图片，提交相应的表单
     $('#ratings').on('click', '.rateButton', function(e){
         console.log($(this).attr('id'))
         let formId = $(this).attr('id')
         
         $('#'+formId).submit();
     });
+    
     
    $('#submitableimag').click(function(){
        console.log('11111')
