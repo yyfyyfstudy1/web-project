@@ -220,9 +220,28 @@
         $this->db->join('users', 'users.username = question.userName');
         $this->db->like('queId', $id);
         // $this->db->like('username', $username);
+        // 这里有个神秘bug
+        $this->db->limit(1);
         return $this->db->get();
        
    }
+
+    // 发布指定问题回答的函数
+    public function userAnswerQuestion($answerContent, $userName, $queId){
+        date_default_timezone_set('Asia/Shanghai');
+         $data = array(
+
+            'userName' => $userName,
+            'queId' => $queId,
+            'pubTime' => date('Y-m-d H:i:s'),
+            'answerContent' => $answerContent
+            
+           
+
+        );
+         $this->db->insert('answer', $data);
+        
+    }
 
 
 }

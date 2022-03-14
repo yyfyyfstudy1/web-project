@@ -95,6 +95,8 @@
 <div style='width:1px;border:1px solid gray;float:left;height:1100px;'><!--这个div模拟一条红色的垂直分割线--></div>
 
 
+<!-- 创建一个父div为问题表单提交 -->
+<div  id="ratings2">
 
 <?php 
 
@@ -129,18 +131,23 @@
     <div class="answer_content">
         <p  style="font-size: 18px;">Hi,  may I ask which tool or programming software should we install on our laptop for this course  ?  Thank you ~ </p>
     </div>
+
     <div class="test2">
     <h3 style="float: left;">Your Answer</h3>
     </div>
-    <div class="rich_text">
-        <!-- 富文本编辑器 -->
-        <textarea name="content"></textarea>
 
-    </div>
-    <div style="float: right; margin-top:15px">
-    <button class="btn btn-primary" type="submit">Submit</button>
-    </div>
-    
+    '. form_open(base_url().'QuestionPanel/postAnswer') .'
+        <div class="rich_text">
+            <!-- 富文本编辑器 -->
+            <textarea name="answer_content"></textarea>
+
+        </div>
+        <div style="float: right; margin-top:15px">
+        <input  name="queUseId" type="hidden" value='.$file2->queId.'>
+        <button class="btn btn-primary" type="submit">Submit</button>
+       
+        </div>
+    '.form_close().'
 
 
 </div>
@@ -168,7 +175,7 @@
         
 
 ?>
-
+</div>
 
 
 
@@ -269,6 +276,13 @@ function myFunction(content)
         let formId = $(this).attr('id')
         
         $('#'+formId).submit();
+    });
+    
+    $('#ratings2').on('click', '.rateButton2', function(e){
+        console.log($(this).attr('id'))
+        let formId = $(this).attr('id')
+        
+        // $('#'+formId).submit();
     });
     
 
