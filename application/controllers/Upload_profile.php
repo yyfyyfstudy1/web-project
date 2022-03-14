@@ -112,6 +112,7 @@ class Upload_profile extends CI_Controller
             $this->load->view('template/footer');
         } else {
 			$this->file_model->user_pic($this->upload->data('file_name'), $this->upload->data('full_path'),$this->session->userdata('username'));
+			$this->file_model->update_user_profile($this->session->userdata('username'),$this->upload->data('file_name'));
            
 		if(!$this->session->userdata('logged_in')){
 			$this->load->view('template/header');

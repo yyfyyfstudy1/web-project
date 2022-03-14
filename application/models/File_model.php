@@ -64,6 +64,19 @@
         
     }
 
+    //把用户头像信息插入user表的函数
+    function update_user_profile($username, $filename)
+    {
+        $data = array(
+            'avaterName' => $filename,
+        
+    );
+    
+    $this->db->where('username', $username);
+    $this->db->update('users', $data);
+        
+    }
+
 
     function print_common_img($category)
     {

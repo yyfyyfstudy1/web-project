@@ -106,12 +106,12 @@
                 echo '
                 
                        
-                <div class="right-container" id="div1" style="display:block">
+    <div class="right-container" id="div1" style="display:block">
     <div class="title">
         <h2>'.$file2->queTitle.'</h2>
     </div>
     <div class="questionerInfo">
-        <image src="http://n.sinaimg.cn/translate/w402h363/20180213/bg7r-fyrpeie1413753.jpg" class="questionerAvater"></image>
+        <image src="'.base_url().'uploads_profile/'.$file2->avaterName.'" class="questionerAvater"></image>
         <div class="questionerName">'.$file2->userName.'</div>
     </div>
     <div class="question_content">
@@ -150,6 +150,18 @@
 
     
             }
+
+        }else{
+
+            echo'
+            
+            <div class="right-container" id="div1" style="display:block">
+
+                <h1>Please select a question</h1>
+
+            </div>
+            ';
+
 
         }
         
