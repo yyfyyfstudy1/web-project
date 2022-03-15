@@ -226,14 +226,24 @@
        
    }
 
+     //  获取指定回复内容的函数
+     public function showAnswer($id){
+        $this->db->select("*");
+        $this->db->from("answer");
+        $this->db->join('users', 'users.username = answer.answerUserName');
+        $this->db->like('answerQueId', $id);
+        return $this->db->get();
+       
+   }
+
     // 发布指定问题回答的函数
     public function userAnswerQuestion($answerContent, $userName, $queId){
         date_default_timezone_set('Asia/Shanghai');
          $data = array(
 
-            'userName' => $userName,
-            'queId' => $queId,
-            'pubTime' => date('Y-m-d H:i:s'),
+            'answerUserName' => $userName,
+            'answerQueId' => $queId,
+            'answerPubTime' => date('Y-m-d H:i:s'),
             'answerContent' => $answerContent
             
            
@@ -242,6 +252,9 @@
          $this->db->insert('answer', $data);
         
     }
+
+
+
 
 
 }

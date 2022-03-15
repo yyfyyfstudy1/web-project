@@ -61,7 +61,7 @@
 
         echo '
         <form action="'.base_url().'QuestionPanel/showQuestion" method="post" id="submitableimag'.$file->queId.'">
-        <div class="rateButton" id="submitableimag'.$file->queId.'">
+        <div class="rateButton" id="'.$file->queId.'">
         <div class="question">
             <div class="question_title">'.$file->queTitle.'</div>
             <div class="question_info">
@@ -96,7 +96,7 @@
 
 
 <!-- 创建一个父div为问题表单提交 -->
-<div  id="ratings2">
+
 
 <?php 
 
@@ -120,43 +120,65 @@
     '.$file2->queContent.'
     </div>
 
-    <div class="test">
-    <h3 > Answer </h3>
-    </div>
     
-    <div class="answer_info">
-        <image src="http://n.sinaimg.cn/translate/w402h363/20180213/bg7r-fyrpeie1413753.jpg" class="answerAvater"></image>
-        <div class="answerName">olivia</div>
-    </div>
-    <div class="answer_content">
-        <p  style="font-size: 18px;">Hi,  may I ask which tool or programming software should we install on our laptop for this course  ?  Thank you ~ </p>
-    </div>
-
-    <div class="test2">
-    <h3 style="float: left;">Your Answer</h3>
-    </div>
-
-    '. form_open(base_url().'QuestionPanel/postAnswer') .'
-        <div class="rich_text">
-            <!-- 富文本编辑器 -->
-            <textarea name="answer_content"></textarea>
-
-        </div>
-        <div style="float: right; margin-top:15px">
-        <input  name="queUseId" type="hidden" value='.$file2->queId.'>
-        <button class="btn btn-primary" type="submit">Submit</button>
-       
-        </div>
-    '.form_close().'
-
-
-</div>
-                
+            
                 
                 ';
 
     
             }
+        //打印回复区域
+        echo '   
+        <div class="test">
+        <h3 > Answer </h3>
+        </div>' ;
+
+
+        foreach($files3 as $file3){
+        echo '
+        
+
+    <div class = "answer_container">
+        <div class="answer_info">
+            <image src="'.base_url().'uploads_profile/'.$file3->avaterName.'" class="answerAvater"></image>
+            <div class="answerName">'.$file3->username.'</div>
+        </div>
+        <div class="answer_content">
+            '.$file3->answerContent.'
+            
+        </div>
+    </div>
+    
+
+        
+        
+        
+        ';
+    
+    }
+        
+        //打印下方的发布表单
+        echo '
+        
+        <div class="test2">
+        <h3 style="float: left;">Your Answer</h3>
+        </div>
+    
+        '. form_open(base_url().'QuestionPanel/postAnswer') .'
+            <div class="rich_text">
+                <!-- 富文本编辑器 -->
+                <textarea name="answer_content"></textarea>
+    
+            </div>
+            <div style="float: right; margin-top:15px">
+            <input  name="queUseId" type="hidden" value='.$file2->queId.'>
+            <button class="btn btn-primary" type="submit">Submit</button>
+           
+            </div>
+        '.form_close().'
+
+        
+        ';
 
         }else{
 
@@ -273,17 +295,12 @@ function myFunction(content)
         // 通过代理获取相应的div，提交相应的表单
     $('#ratings').on('click', '.rateButton', function(e){
         console.log($(this).attr('id'))
-        let formId = $(this).attr('id')
+        let formId = 'submitableimag' + $(this).attr('id')
         
         $('#'+formId).submit();
     });
     
-    $('#ratings2').on('click', '.rateButton2', function(e){
-        console.log($(this).attr('id'))
-        let formId = $(this).attr('id')
-        
-        // $('#'+formId).submit();
-    });
+   
     
 
         

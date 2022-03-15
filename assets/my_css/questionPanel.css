@@ -84,7 +84,13 @@
 .test{
     float: left;
     width: 600px;
-    margin-top: 40px;
+    margin-top: 50px;
+}
+
+
+.answer_container{
+    margin-top: 50px;
+    float: left;
 }
 
 .answer_info{
