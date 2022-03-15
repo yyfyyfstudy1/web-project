@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div style='width:1px;border:1px solid gray;float:left;height:550px;'><!--这个div模拟一条红色的垂直分割线--></div>
+<div style='width:1px;border:1px solid gray;float:left;height:520px;'><!--这个div模拟一条红色的垂直分割线--></div>
 <div class="middle-container" >
     <!-- 搜索框 -->
     <div class="input-group mb-3">
@@ -92,7 +92,7 @@
 </div>
 
 
-<div style='width:1px;border:1px solid gray;float:left;height:550px;'><!--这个div模拟一条红色的垂直分割线--></div>
+<div style='width:1px;border:1px solid gray;float:left;height:520px;'><!--这个div模拟一条红色的垂直分割线--></div>
 
 
 <!-- 创建一个父div为问题表单提交 -->
@@ -108,7 +108,7 @@
                 echo '
                 
                        
-    <div class="right-container" id="div1" style="display:block">
+    <div class="right-container" id="div1" style="display:block; overflow-y:auto; overflow-x: hidden;height:500px; width: 650px;">
 
     <div class="title">
         <h2>'.$file2->queTitle.'</h2>
@@ -173,7 +173,7 @@
             </div>
             <div style="float: right; margin-top:15px">
             <input  name="queUseId" type="hidden" value='.$file2->queId.'>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary" type="submit" style="margin-right:25px">Submit</button>
            
             </div>
         '.form_close().'

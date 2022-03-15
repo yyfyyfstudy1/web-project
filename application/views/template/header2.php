@@ -23,13 +23,13 @@
           
             <a href="<?php echo base_url(); ?>upload" class="btn btn-light"> publish</a>
        
-            <a href="<?php echo base_url(); ?>load_img" class="btn btn-light"> private</a>
+            <!-- <a href="<?php echo base_url(); ?>load_img" class="btn btn-light"> private</a>
           
             <a href="<?php echo base_url(); ?>Upload_profile" class="btn btn-light"> profile </a>
         
             <a href="<?php echo base_url(); ?>file_common" class="btn btn-light"> gallery</a>
        
-            <a href="<?php echo base_url(); ?>Wechat" class="btn btn-light"> chat room</a>
+            <a href="<?php echo base_url(); ?>Wechat" class="btn btn-light"> chat room</a> -->
 
             <a href="<?php echo base_url(); ?>QuestionPanel" class="btn btn-light"> Question Board</a>
         
@@ -55,7 +55,7 @@
 
                   foreach($error as $img_src0){
                   echo '
-                  <div style= "background-color:#E6EAD7; float:left; width:40; height:40; ">
+                  <div style= "background-color:#E6EAD7; float:left; width:40; height:40; margin-left:180px">
                   <img src = '. $img_src0.' width="40" height="40" style="border-style:solid;
                   border-width:2px; border-color:gray;">
                   </div>
