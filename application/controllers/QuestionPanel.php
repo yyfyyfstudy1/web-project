@@ -5,7 +5,7 @@ class QuestionPanel extends CI_Controller
     public function index()
     {
 		if(!$this->session->userdata('logged_in')){
-			$this->load->view('template/header');
+			$this->load->view('template/header2');
 		}else{
 			$this->load->model('file_model');
 			$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
@@ -18,7 +18,7 @@ class QuestionPanel extends CI_Controller
    
 				   }
 			$data_use['error'] = $var;
-			$this->load->view('template/header',$data_use);
+			$this->load->view('template/header2',$data_use);
 		} 
 
 
@@ -51,7 +51,7 @@ class QuestionPanel extends CI_Controller
 			$this->load->model('file_model');	
 			
             if(!$this->session->userdata('logged_in')){
-				$this->load->view('template/header');
+				$this->load->view('template/header2');
 			}else{
 				$this->load->model('file_model');
 				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
@@ -64,7 +64,7 @@ class QuestionPanel extends CI_Controller
 	   
 					   }
 				$data_use['error'] = $var;
-				$this->load->view('template/header',$data_use);
+				$this->load->view('template/header2',$data_use);
 			}
 
 			$category = $this->input->post('category_filter');
@@ -98,7 +98,7 @@ class QuestionPanel extends CI_Controller
 		$this->load->model('file_model');	
 			
             if(!$this->session->userdata('logged_in')){
-				$this->load->view('template/header');
+				$this->load->view('template/header2');
 			}else{
 				$this->load->model('file_model');
 				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
@@ -111,7 +111,7 @@ class QuestionPanel extends CI_Controller
 	   
 					   }
 				$data_use['error'] = $var;
-				$this->load->view('template/header',$data_use);
+				$this->load->view('template/header2',$data_use);
 			}
 
 
@@ -137,7 +137,7 @@ class QuestionPanel extends CI_Controller
 		$this->load->model('file_model');	
 			
             if(!$this->session->userdata('logged_in')){
-				$this->load->view('template/header');
+				$this->load->view('template/header2');
 			}else{
 				$this->load->model('file_model');
 				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
@@ -150,7 +150,7 @@ class QuestionPanel extends CI_Controller
 	   
 					   }
 				$data_use['error'] = $var;
-				$this->load->view('template/header',$data_use);
+				$this->load->view('template/header2',$data_use);
 			}
 
 
@@ -185,7 +185,7 @@ class QuestionPanel extends CI_Controller
 			$this->load->model('file_model');	
 				
 				if(!$this->session->userdata('logged_in')){
-					$this->load->view('template/header');
+					$this->load->view('template/header2');
 				}else{
 					$this->load->model('file_model');
 					$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
@@ -198,7 +198,7 @@ class QuestionPanel extends CI_Controller
 		   
 						   }
 					$data_use['error'] = $var;
-					$this->load->view('template/header',$data_use);
+					$this->load->view('template/header2',$data_use);
 				}
 	
 	

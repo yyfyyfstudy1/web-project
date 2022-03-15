@@ -13,6 +13,8 @@
     
     width: 400px;
     float: left;
+    height:550px;
+    overflow-y:auto
 
 }
 
@@ -46,6 +48,10 @@
 }
 
 .right-container{
+    height:550px;
+    overflow-y:auto;
+    width: 655px;
+    
 
 }
 
@@ -84,17 +90,19 @@
 .test{
     float: left;
     width: 600px;
-    margin-top: 50px;
+    margin-top: 60px;
 }
 
 
 .answer_container{
+    width: 600px;
     margin-top: 50px;
-    float: left;
+   
 }
 
 .answer_info{
-    margin-top: 20px;
+    width: 600px;
+    margin-top: 50px;
     float: left;
 
 }
@@ -118,6 +126,7 @@
 }
 
 .answer_content{
+    width: 600px;
     float: left;
     margin-top: 15px;
 }

@@ -15,8 +15,8 @@
     </div>
 </div>
 
-<div style='width:1px;border:1px solid gray;float:left;height:1100px;'><!--这个div模拟一条红色的垂直分割线--></div>
-<div class="middle-container">
+<div style='width:1px;border:1px solid gray;float:left;height:550px;'><!--这个div模拟一条红色的垂直分割线--></div>
+<div class="middle-container" >
     <!-- 搜索框 -->
     <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -92,7 +92,7 @@
 </div>
 
 
-<div style='width:1px;border:1px solid gray;float:left;height:1100px;'><!--这个div模拟一条红色的垂直分割线--></div>
+<div style='width:1px;border:1px solid gray;float:left;height:550px;'><!--这个div模拟一条红色的垂直分割线--></div>
 
 
 <!-- 创建一个父div为问题表单提交 -->
@@ -109,6 +109,7 @@
                 
                        
     <div class="right-container" id="div1" style="display:block">
+
     <div class="title">
         <h2>'.$file2->queTitle.'</h2>
     </div>

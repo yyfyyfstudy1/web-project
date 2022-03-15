@@ -11,7 +11,7 @@
                 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/my_css/icon.css" />
             
         </head>
-        <body >
+        <body style="overflow-y: hidden">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#" style="font-weight: bold; margin-left: 30px;">INFS4208</a>
 
