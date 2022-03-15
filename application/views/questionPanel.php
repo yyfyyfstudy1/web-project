@@ -185,9 +185,9 @@
 
             echo'
             
-            <div class="right-container" id="div1" style="display:block">
+            <div class="right-container" id="div1" style="display:block; text-align:center; margin-top: 250px; ">
 
-                <h1>Please select a question</h1>
+                <h1 style="color:gray">Select a thread</h1>
 
             </div>
             ';
@@ -214,14 +214,14 @@ function myFunction(content)
 
 <?php echo form_open_multipart('QuestionPanel/question_upload');?>
 
-<div id="div2" style="display:none" class="post_container">
+<div id="div2" style="display:none; height:470px; overflow-y:auto; overflow-x: hidden;" class="post_container">
 
-    <div style="margin-top: 20px;"><h2>&nbspNew Question</h2></div>
-    
+    <div style="margin-top: 20px; margin-left: 15px"><h2>&nbspNew Question</h2></div>
+    <div style="margin-left: 20px;">
     <div class="row mb-3" style="margin-top: 20px;">
         <label for="inputEmail3" class="col-sm-2 col-form-label">title</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" name="title">
+        <input type="text" class="form-control" name="title" style="width: 500px;">
         </div>
     </div>
 
@@ -241,6 +241,7 @@ function myFunction(content)
             <input type="hidden" value="" id="hidden_input" name="category" >
             </div>
         </div>
+    </div>
     </div>
     <div class="rich_text2">
         <!-- 富文本编辑器 -->
