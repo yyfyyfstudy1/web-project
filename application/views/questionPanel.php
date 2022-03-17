@@ -168,7 +168,7 @@
         '. form_open(base_url().'QuestionPanel/postAnswer') .'
             <div class="rich_text">
                 <!-- 富文本编辑器 -->
-                <textarea name="answer_content"></textarea>
+                <textarea name="answer_content" id="myTextarea"></textarea>
     
             </div>
             <div style="float: right; margin-top:15px">
@@ -245,7 +245,7 @@ function myFunction(content)
     </div>
     <div class="rich_text2">
         <!-- 富文本编辑器 -->
-        <textarea name="content"></textarea>
+        <textarea name="content" id="myTextarea"></textarea>
 
     </div>
 
@@ -315,7 +315,8 @@ function myFunction(content)
     <script src="<?php echo base_url(); ?>assets2/lib/template-web.js"></script>
     <!-- 富文本 -->
     <script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymce.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymce_setup.js"></script>
+     <!-- 导入富文本设置 -->
+     <script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymceSetUp.js">></script>
     <!-- 导入 cropper 相关的脚本 -->
     <script src="<?php echo base_url(); ?>assets2/lib/cropper/Cropper.js"></script>
     <script src="<?php echo base_url(); ?>assets2/lib/cropper/jquery-cropper.js"></script>

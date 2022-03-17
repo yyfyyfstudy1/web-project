@@ -35,7 +35,7 @@
             <!-- 为富文本编辑器外部的容器设置高度 -->
             <div class="layui-input-block" style="height: 400px;">
               <!-- 重要：将来这个 textarea 会被初始化为富文本编辑器 -->
-              <textarea name="content"></textarea>
+              <textarea name="content" id="myTextarea"></textarea>
             </div>
           </div>
             <div style="margin-left:150px;">
@@ -112,12 +112,17 @@
     <script src="<?php echo base_url(); ?>assets2/lib/template-web.js"></script>
     <!-- 富文本 -->
     <script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymce.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymce_setup.js"></script>
+     <!-- 导入富文本设置 -->
+     <script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymceSetUp.js">></script>
+    
     <!-- 导入 cropper 相关的脚本 -->
     <script src="<?php echo base_url(); ?>assets2/lib/cropper/Cropper.js"></script>
     <script src="<?php echo base_url(); ?>assets2/lib/cropper/jquery-cropper.js"></script>
     <!-- 导入自己的 JS -->
-    <script src="<?php echo base_url(); ?>assets2/lib/art_pub.js"></script>
+    <!-- <script src="<?php echo base_url(); ?>assets2/lib/art_pub.js"></script> -->
+
+
+   
   </body>
 </html>
 
