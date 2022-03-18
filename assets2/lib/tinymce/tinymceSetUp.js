@@ -1,5 +1,9 @@
 tinymce.init({
     selector: '#myTextarea',
+    image_class_list: [
+        {title: 'None', value: 'test1'},
+        {title: 'Lightbox', value: 'lightbox'},
+    ],
     // plugins: 'image code',
     //方向从左到右
      directionality: 'ltr',
@@ -48,6 +52,7 @@ tinymce.init({
             var json;
         
             if (xhr.status != 200) {
+                
                 failure('HTTP Error: ' + xhr.status);
                 return;
             }

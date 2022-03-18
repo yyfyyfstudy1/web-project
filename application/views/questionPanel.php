@@ -1,3 +1,39 @@
+
+<style>
+#modal_box {
+	display: none;
+}
+.modal_box {
+    margin: auto;
+    padding-top: 5%;
+    width: 50%;
+    height: 80%;
+    z-index: 0;
+}
+
+.modal1 img {
+   
+    display: block;
+    padding: 10px;
+    margin: auto;
+    width: 60%;
+    height: 60%;
+    box-shadow: 0 2px 6px rgb(0, 0, 0, 0.2), 0 10px 20px rgb(0, 0, 0, 0.2);
+    border-radius: 12px;
+    border: 1px solid white;
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)}
+    to {transform: scale(1)}
+}
+
+.thum-img {
+    
+    display: block;
+
+}
+</style>
 <div class="left-container">
     <div class="button-group">
     <button class="btn btn-primary" type="submit" style="width:170px" id="showHidden">New Thread</button>
@@ -201,7 +237,6 @@
 
 
 
-
 <script>
 function myFunction(content)
 {
@@ -256,7 +291,12 @@ function myFunction(content)
 <?php echo form_close(); ?>
 
 
-
+<!-- 先来实现弹窗 -->
+<div style='position:fixed;width:100%;height:100%;background-color:rgb(0,0,0,0.65)' id='modal_box'>
+<div class='modal1'>
+    <img id='bgImg1' />
+</div>
+</div>
 
 
 
@@ -301,8 +341,26 @@ function myFunction(content)
         $('#'+formId).submit();
     });
     
-   
     
+    // 为image添加放大效果
+    var modal = document.getElementById('modal_box');
+    var bgImg = document.getElementById('bgImg1');
+    const imgs = document.querySelectorAll("img");
+    
+    [].forEach.call(imgs, function(img) {
+    // do whatever
+    img.classList.add("thum-img");
+    img.addEventListener("click", function() {
+        console.log(img.src)
+        modal.style.display = 'block';
+		bgImg.src = img.src;
+        })
+
+    });
+    
+    modal.onclick = function() {
+		modal.style.display = 'none';
+	}
 
         
     </script>
