@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html>
         <head>
                 <title>INFS4200 project</title>

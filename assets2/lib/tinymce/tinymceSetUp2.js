@@ -42,7 +42,7 @@ tinymce.init({
       
         xhr = new XMLHttpRequest();
         xhr.withCredentials = false;
-        xhr.open('POST', 'upload/rich_Upload');
+        xhr.open('POST', 'rich_Upload');
       
         xhr.onload = function() {
             var json;

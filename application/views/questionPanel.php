@@ -14,7 +14,6 @@
 
     </div>
 </div>
-
 <div style='width:1px;border:1px solid gray;float:left;height:520px;'><!--这个div模拟一条红色的垂直分割线--></div>
 <div class="middle-container" >
     <!-- 搜索框 -->
@@ -316,7 +315,7 @@ function myFunction(content)
     <!-- 富文本 -->
     <script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymce.min.js"></script>
      <!-- 导入富文本设置 -->
-     <script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymceSetUp.js">></script>
+     <script src="<?php echo base_url(); ?>assets2/lib/tinymce/tinymceSetUp2.js">></script>
     <!-- 导入 cropper 相关的脚本 -->
     <script src="<?php echo base_url(); ?>assets2/lib/cropper/Cropper.js"></script>
     <script src="<?php echo base_url(); ?>assets2/lib/cropper/jquery-cropper.js"></script>

@@ -135,7 +135,7 @@ class Upload extends CI_Controller
 			move_uploaded_file($temp['tmp_name'], $filetowrite);
 		
 			// Respond to the successful upload with JSON.
-			echo json_encode(array('location' => $filetowrite));
+			echo json_encode(array('location' => 'http://localhost/infs3202/'.$filetowrite));
 		} else {
 			// Notify editor that the upload failed
 			header("HTTP/1.1 500 Server Error");
