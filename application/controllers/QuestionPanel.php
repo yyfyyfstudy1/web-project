@@ -166,7 +166,17 @@ class QuestionPanel extends CI_Controller
 
 			$data3 = $this->file_model->showAnswer($ID);
 		
-			
+			$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
+	
+			$var = array();
+			foreach($img_name->result() as $row)
+				   {
+					 
+				   $var[] = ''.base_url().'uploads_profile/'.$row->filename.'';
+   
+				   }
+
+			$data_use['user_Avater'] = $var;
 			$data_use['files'] = $data->result();
 			$data_use['files2'] = $data2->result();
 			$data_use['files3'] = $data3->result();
@@ -217,6 +227,18 @@ class QuestionPanel extends CI_Controller
 				$data2 = $this->file_model->showQuestion($queUseId);
 
 				$data3 = $this->file_model->showAnswer($queUseId);
+
+				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
+	
+			$var = array();
+			foreach($img_name->result() as $row)
+				   {
+					 
+				   $var[] = ''.base_url().'uploads_profile/'.$row->filename.'';
+   
+				   }
+
+			$data_use['user_Avater'] = $var;
 	
 				
 				$data_use['files'] = $data->result();
@@ -279,10 +301,70 @@ class QuestionPanel extends CI_Controller
 		}
 
 
+		// 定义发布回复评论的函数
+		public function commentPost(){
+			$this->load->model('file_model');	
+				
+				if(!$this->session->userdata('logged_in')){
+					$this->load->view('template/header2');
+				}else{
+					$this->load->model('file_model');
+					$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
 		
+					$var = array();
+					foreach($img_name->result() as $row)
+						   {
+							 
+						   $var[] = ''.base_url().'uploads_profile/'.$row->filename.'';
+		   
+						   }
+					$data_use['error'] = $var;
+					$this->load->view('template/header2',$data_use);
+				}
+	
+	
+				
+				$queUseId = $this->input->post('commentQueID');
+				$answerContent =  $this->input->post('comment_content');
+				$commentId = $this->input->post('commentID');
+	
+				// 先从cookie里获取分类的信息
+				$category = get_cookie('category');
+				
+				//$this->file_model->userAnswerQuestion($answerContent, $this->session->userdata('username'), $queUseId);
+				
+				$data = $this->file_model->takePostQuestion($category);
+	
+				$data2 = $this->file_model->showQuestion($queUseId);
+
+				$data3 = $this->file_model->showAnswer($queUseId);
+
+				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
+	
+				$var = array();
+				foreach($img_name->result() as $row)
+					{
+						
+					$var[] = ''.base_url().'uploads_profile/'.$row->filename.'';
+	
+					}
+
+				$data_use['user_Avater'] = $var;
+	
+				
+				$data_use['files'] = $data->result();
+				$data_use['files2'] = $data2->result();
+				$data_use['files3'] = $data3->result();
+		
+				// 把问题的内容传递给前端页面
+				$this->load->view('questionPanel', $data_use); 
+	
+				// $this->load->view('template/footer');
+
+		}
 
 
-
+		
 
 
 	}

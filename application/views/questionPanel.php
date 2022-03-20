@@ -50,6 +50,9 @@
 
     </div>
 </div>
+
+
+
 <div style='width:1px;border:1px solid gray;float:left;height:520px;'><!--这个div模拟一条红色的垂直分割线--></div>
 <div class="middle-container" >
     <!-- 搜索框 -->
@@ -151,10 +154,13 @@
     <div class="questionerInfo">
         <image src="'.base_url().'uploads_profile/'.$file2->avaterName.'" class="questionerAvater"></image>
         <div class="questionerName">'.$file2->userName.'</div>
+        <div style="float: left; background-color:yellow; margin-left:10px; margin-top:10px"><p style="font-weight:bold">'.$file2->staff.'<p></div>
     </div>
     <div class="question_content">
     '.$file2->queContent.'
     </div>
+
+   
 
     
             
@@ -167,22 +173,67 @@
         echo '   
         <div class="test">
         <h3 > Answer </h3>
-        </div>' ;
-
-
+        </div>
+        ' ;
+    
+            // 为评论面板绑定一个父元素 
+        echo '<div id= "fater_container">';
         foreach($files3 as $file3){
+
         echo '
-        
 
     <div class = "answer_container">
         <div class="answer_info">
             <image src="'.base_url().'uploads_profile/'.$file3->avaterName.'" class="answerAvater"></image>
             <div class="answerName">'.$file3->username.'</div>
+            <div style="float: left; background-color:yellow; margin-left:10px; margin-top:10px"><p style="font-weight:bold">'.$file3->staff.'<p></div>
         </div>
         <div class="answer_content">
             '.$file3->answerContent.'
             
         </div>
+        
+        <div class="rateButton2" id="'.$file3->answerId.'">
+            <div class="question_content" id="div3'.$file3->answerId.'" style="display:block;">
+            
+            <input type="button"  value="Add Comment" style="width:540px; margin-top:15px; height:40px; text-indent:10px" class="form-control btn-outline-secondary" >
+            </div>
+        </div>
+        
+        
+            <!-- 隐藏起来的评论div -->
+            <div id="div4'.$file3->answerId.'" style="display:none; " class="question_content">
+                <!-- 放置发布评论的富文本 -->
+                
+                <form action="'.base_url().'QuestionPanel/commentPost" method="post" id="postComment'.$file->queId.'">
+                <div style="margin-top:15px">
+                    <image src="'.$user_Avater[0].'" class="answerAvater"></image>
+                    <div class="rich_text3">
+                        <!-- 富文本编辑器 -->
+                        <textarea name="comment_content" id="myTextarea'.$file3->answerId.'"></textarea>
+                        <input  name="commentQueID" type="hidden" value='.$file3->answerQueId.'>
+                        <input  name="commentID" type="hidden" value='.$file3->answerId.'>
+                    </div>
+                  
+                    
+                </div>
+               
+                  <button  type="submit" class="post_button">Post</button>
+               </form>
+                
+               <div class="rateButton3" id="'.$file3->answerId.'">
+               <button type="submit" class="cancle_button">cancle</button>
+               </div>
+
+
+
+               
+               
+            </div>
+        
+
+
+        
     </div>
     
 
@@ -192,6 +243,8 @@
         ';
     
     }
+
+    echo '</div>';
         
         //打印下方的发布表单
         echo '
@@ -234,6 +287,7 @@
 
 ?>
 </div>
+
 
 
 
@@ -288,7 +342,13 @@ function myFunction(content)
 
 
 </div>
+
+
 <?php echo form_close(); ?>
+
+
+
+
 
 
 <!-- 先来实现弹窗 -->
@@ -316,6 +376,8 @@ function myFunction(content)
 
         }
 
+        
+
         var sh = document.getElementById("showHidden");
 
         sh.onclick = function () {
@@ -336,11 +398,110 @@ function myFunction(content)
         // 通过代理获取相应的div，提交相应的表单
     $('#ratings').on('click', '.rateButton', function(e){
         console.log($(this).attr('id'))
+        var useID = $(this).attr('id');
         let formId = 'submitableimag' + $(this).attr('id')
         
         $('#'+formId).submit();
     });
     
+
+    // 通过代理获取相应的div，提交相应的表单
+    $('#fater_container').on('click', '.rateButton2', function(e){
+        console.log("div3"+$(this).attr('id'))
+
+        var div3 = document.getElementById("div3"+$(this).attr('id'));
+        var div4 = document.getElementById("div4"+$(this).attr('id'));
+
+        // show_hidden(div3);
+
+        show_hidden(div3);
+        show_hidden(div4);
+
+     tinymce.init({
+    selector: '#myTextarea'+$(this).attr('id'),
+    // plugins: 'image code',
+    //方向从左到右
+     directionality: 'ltr',
+     convert_urls: false,
+    plugins: [
+    'advlist autolink link image lists charmap preview hr anchor pagebreak spellchecker',
+    'searchreplace wordcount visualblocks visualchars code insertdatetime nonbreaking',
+    'save table contextmenu directionality template paste textcolor',
+    'codesample imageupload'
+    ],
+    toolbar: 'undo redo | image code',
+     //高度为400
+     height: 200,
+    statusbar: false,
+     width: '100%',
+    //工具栏的补丁按钮
+    toolbar:
+    'insertfile undo redo | \
+    styleselect | \
+    bold italic | \
+    alignleft aligncenter alignright alignjustify | \
+   ',
+
+     //字体大小
+    fontsize_formats: '10pt 12pt 14pt 18pt 24pt 36pt',
+    //按tab不换行
+    nonbreaking_force_tab: true,
+
+    // without images_upload_url set, Upload tab won't show up
+    images_upload_url: 'wtfk',
+    convert_urls : false,
+    // override default upload handler to simulate successful upload
+    images_upload_handler: function (blobInfo, success, failure) {
+        var xhr, formData;
+      
+        xhr = new XMLHttpRequest();
+        xhr.withCredentials = false;
+        xhr.open('POST', 'rich_Upload');
+      
+        xhr.onload = function() {
+            var json;
+        
+            if (xhr.status != 200) {
+                failure('HTTP Error: ' + xhr.status);
+                return;
+            }
+        
+            json = JSON.parse(xhr.responseText);
+        
+            if (!json || typeof json.location != 'string') {
+                failure('Invalid JSON: ' + xhr.responseText);
+                return;
+            }
+        
+            success(json.location);
+        };
+      
+        formData = new FormData();
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
+      
+        xhr.send(formData);
+    },
+});
+
+        return false;
+        
+    });
+
+
+    // 为cancle button绑定点击事件
+    $('#fater_container').on('click', '.rateButton3', function(e){
+        console.log("div3"+$(this).attr('id'))
+
+        var div3 = document.getElementById("div3"+$(this).attr('id'));
+        var div4 = document.getElementById("div4"+$(this).attr('id'));
+
+        // show_hidden(div3);
+
+        show_hidden(div3);
+        show_hidden(div4);
+
+    });
+
     
     // 为image添加放大效果
     var modal = document.getElementById('modal_box');

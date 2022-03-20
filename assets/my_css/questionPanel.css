@@ -82,8 +82,10 @@
 }
 
 .question_content{
+    width: 600px;
     float: left;
     margin-top: 15px;
+    margin-left: 58px;
 
 }
 
@@ -95,7 +97,7 @@
 
 
 .answer_container{
-    width: 600px;
+    width: 550px;
     margin-top: 50px;
    
 }
@@ -129,6 +131,8 @@
     width: 600px;
     float: left;
     margin-top: 15px;
+    margin-left: 58px;
+    
 }
 .test2{
     float: left;
@@ -150,3 +154,46 @@
     margin-left: 20px;
 }
 
+.rich_text3{
+    float: left;
+    width: 490px;
+    padding-left: 15px;
+}
+
+.post_button { /* 按钮美化 */
+	width: 100px; /* 宽度 */
+	height: 40px; /* 高度 */
+	border-width: 0px; /* 边框宽度 */
+	border-radius: 3px; /* 边框半径 */
+	background: #1E90FF; /* 背景颜色 */
+	cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+	outline: none; /* 不显示轮廓线 */
+	font-family: Microsoft YaHei; /* 设置字体 */
+	color: white; /* 字体颜色 */
+	font-size: 16px; /* 字体大小 */
+    float: right;
+    margin-right: 66px;
+    margin-top: 10px;
+}
+.post_button:hover { /* 鼠标移入按钮范围时改变颜色 */
+	background: #5599FF;
+}
+
+.cancle_button { /* 按钮美化 */
+	width: 100px; /* 宽度 */
+	height: 40px; /* 高度 */
+	border-width: 0px; /* 边框宽度 */
+	border-radius: 3px; /* 边框半径 */
+	background: #f32121; /* 背景颜色 */
+	cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+	outline: none; /* 不显示轮廓线 */
+	font-family: Microsoft YaHei; /* 设置字体 */
+	color: rgb(255, 255, 255); /* 字体颜色 */
+	font-size: 16px; /* 字体大小 */
+    float: right;
+    margin-right: 16px;
+    margin-top: 10px;
+}
+.cancle_button:hover { /* 鼠标移入按钮范围时改变颜色 */
+	background: #ff5757;
+}

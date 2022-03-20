@@ -72,4 +72,5 @@ tinymce.init({
       
         xhr.send(formData);
     },
+    
 });
