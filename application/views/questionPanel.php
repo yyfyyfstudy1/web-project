@@ -51,6 +51,13 @@
     </div>
 </div>
 
+<!-- <?php
+$a=array("red","green");
+$b=array("test1","green");
+array_push($a,"blue","yellow",$b,$b);
+print_r($a);
+print_r($a[4][0]);
+?> -->
 
 
 <div style='width:1px;border:1px solid gray;float:left;height:520px;'><!--这个div模拟一条红色的垂直分割线--></div>
@@ -199,7 +206,7 @@
             <input type="button"  value="Add Comment" style="width:540px; margin-top:15px; height:40px; text-indent:10px" class="form-control btn-outline-secondary" >
             </div>
         </div>
-        
+
         
             <!-- 隐藏起来的评论div -->
             <div id="div4'.$file3->answerId.'" style="display:none; " class="question_content">
@@ -212,7 +219,7 @@
                         <!-- 富文本编辑器 -->
                         <textarea name="comment_content" id="myTextarea'.$file3->answerId.'"></textarea>
                         <input  name="commentQueID" type="hidden" value='.$file3->answerQueId.'>
-                        <input  name="commentID" type="hidden" value='.$file3->answerId.'>
+                        <input  name="commentAnswerID" type="hidden" value='.$file3->answerId.'>
                     </div>
                   
                     
@@ -232,17 +239,30 @@
             </div>
         
 
-
+            
         
     </div>
     
-
-        
+            
+    
         
         
         ';
+
+        foreach ($files4 as $file4){
+            if($file4->comment_ans_id == $file3->answerId){
+                echo '<div style="float:left">
+                
+                '.$file4 ->comment_content.'
+                
+                </div>';
+            }
+        }
+
     
     }
+   
+    
 
     echo '</div>';
         
@@ -292,6 +312,7 @@
 
 
 <script>
+    
 function myFunction(content)
 {
 
@@ -362,6 +383,7 @@ function myFunction(content)
 
 
 <script type='text/javascript'>
+    
         function show_hidden(obj) {
 
             if (obj.style.display == 'block') {
@@ -523,6 +545,7 @@ function myFunction(content)
 		modal.style.display = 'none';
 	}
 
+    
         
     </script>
 

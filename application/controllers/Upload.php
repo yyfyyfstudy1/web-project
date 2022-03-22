@@ -100,7 +100,7 @@ class Upload extends CI_Controller
 	public function rich_Upload(){
 
 				// Allowed origins to upload images
-		$accepted_origins = array("http://localhost", "http://107.161.82.130", "http://codexworld.com");
+		$accepted_origins = array("http://localhost", "https://infs3202-f3b94c2a.uqcloud.net", "http://codexworld.com");
 
 		// Images upload path
 		$imageFolder = "uploads/";
