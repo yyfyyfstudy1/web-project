@@ -233,6 +233,7 @@ class QuestionPanel extends CI_Controller
 				$data2 = $this->file_model->showQuestion($queUseId);
 
 				$data3 = $this->file_model->showAnswer($queUseId);
+				$data4 = $this->file_model->showComment();
 
 				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
 	
@@ -250,6 +251,7 @@ class QuestionPanel extends CI_Controller
 				$data_use['files'] = $data->result();
 				$data_use['files2'] = $data2->result();
 				$data_use['files3'] = $data3->result();
+				$data_use['files4'] = $data4->result();
 		
 				// 把问题的内容传递给前端页面
 				$this->load->view('questionPanel', $data_use); 
@@ -346,7 +348,7 @@ class QuestionPanel extends CI_Controller
 				$data3 = $this->file_model->showAnswer($queUseId);
 				
 
-				$this->file_model->post_comment($answerContent, $queUseId, $commentAnswerId );
+				$this->file_model->post_comment($answerContent, $queUseId, $commentAnswerId, $this->session->userdata('username') );
 				$data4 = $this->file_model->showComment();
 
 				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
@@ -366,6 +368,7 @@ class QuestionPanel extends CI_Controller
 				$data_use['files2'] = $data2->result();
 				$data_use['files3'] = $data3->result();
 				$data_use['files4'] = $data4->result();
+				
 		
 				// 把问题的内容传递给前端页面
 				$this->load->view('questionPanel', $data_use); 

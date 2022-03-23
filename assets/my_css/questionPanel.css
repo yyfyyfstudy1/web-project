@@ -65,8 +65,8 @@
 }
 
 .questionerAvater{
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     float: left;
 }
@@ -85,7 +85,7 @@
     width: 600px;
     float: left;
     margin-top: 15px;
-    margin-left: 58px;
+    margin-left: 50px;
 
 }
 
@@ -104,15 +104,15 @@
 
 .answer_info{
     width: 600px;
-    margin-top: 50px;
+    margin-top: 55px;
     float: left;
 
 }
 
 .answerAvater{
 
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     float: left;
 
@@ -196,4 +196,40 @@
 }
 .cancle_button:hover { /* 鼠标移入按钮范围时改变颜色 */
 	background: #ff5757;
+}
+
+
+
+
+.commentInfo{
+   
+    margin-left: 50px;
+    width: 300px;
+   
+
+}
+
+.commentAvater{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    float: left;
+}
+
+.commentName{
+    float: left;
+    margin-left: 12px;
+    margin-top: 8px;
+    color: rgb(247, 93, 3);
+    font-size: 14px;
+    font-weight: bold
+
+}
+
+.comment_content{
+    width: 600px;
+    float: left;
+   
+    margin-left: 95px;
+
 }

@@ -255,14 +255,15 @@
 
 
     //发布评论的函数
-    public function post_comment($comment_content , $commentQueID, $comment_ans_id){
+    public function post_comment($comment_content , $commentQueID, $comment_ans_id, $commenter_name){
         date_default_timezone_set('Asia/Shanghai');
          $data = array(
 
             'comment_content' => $comment_content,
             'comment_que_id' => $commentQueID,
             'comment_ans_id' => $comment_ans_id,
-            'comment_time' => date('Y-m-d H:i:s')
+            'comment_time' => date('Y-m-d H:i:s'),
+            'commenter_name'=>$commenter_name
             
            
 
@@ -275,6 +276,7 @@
       public function showComment(){
         $this->db->select("*");
         $this->db->from("queboard_comments");
+        $this->db->join('users', 'users.username = queboard_comments.commenter_name');
         
         return $this->db->get();
        

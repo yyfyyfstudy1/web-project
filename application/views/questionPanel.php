@@ -1,5 +1,6 @@
 
 <style>
+    
 #modal_box {
 	display: none;
 }
@@ -203,7 +204,7 @@ print_r($a[4][0]);
         <div class="rateButton2" id="'.$file3->answerId.'">
             <div class="question_content" id="div3'.$file3->answerId.'" style="display:block;">
             
-            <input type="button"  value="Add Comment" style="width:540px; margin-top:15px; height:40px; text-indent:10px" class="form-control btn-outline-secondary" >
+            <input type="button"  value="Add Comment" style="width:540px; margin-top:15px; height:28px; font-size:13px" class="form-control btn-outline-secondary" >
             </div>
         </div>
 
@@ -214,7 +215,7 @@ print_r($a[4][0]);
                 
                 <form action="'.base_url().'QuestionPanel/commentPost" method="post" id="postComment'.$file->queId.'">
                 <div style="margin-top:15px">
-                    <image src="'.$user_Avater[0].'" class="answerAvater"></image>
+                    <image src="'.$user_Avater[0].'" class="commentAvater"></image>
                     <div class="rich_text3">
                         <!-- 富文本编辑器 -->
                         <textarea name="comment_content" id="myTextarea'.$file3->answerId.'"></textarea>
@@ -248,14 +249,20 @@ print_r($a[4][0]);
         
         
         ';
-
+        // 下方打印评论内容
         foreach ($files4 as $file4){
             if($file4->comment_ans_id == $file3->answerId){
-                echo '<div style="float:left">
-                
-                '.$file4 ->comment_content.'
-                
-                </div>';
+                echo '  
+            <div style="float:left; margin-top:15px">
+                <div class="commentInfo">
+                <image src="'.base_url().'uploads_profile/'.$file4->avaterName.'" class="commentAvater"></image>
+                <div class="commentName">'.$file4->username.'</div>
+                <div style="float: left; background-color:yellow; margin-left:10px; margin-top:10px"><p style="font-weight:bold; font-size:14px">'.$file2->staff.'<p></div>
+            </div>
+            <div class="comment_content">
+            '.$file4->comment_content.'
+            </div>
+            </div>';
             }
         }
 
@@ -307,7 +314,6 @@ print_r($a[4][0]);
 
 ?>
 </div>
-
 
 
 
