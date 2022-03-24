@@ -256,7 +256,7 @@
             </div>
              <div class="content-container">
                 
-                <image src="'.base_url().'assets/img/arrow1.png" class="arrow1"></image>    
+                <image src="'.base_url().'assets/img/arrow1.png" class="arrow1" id ="arrow1'.$file4->comment_id.'"></image>    
                 
                 <div class="comment_reply_content" id="demo'.$file4->comment_id.'">
                 '.$file4->comment_content.'
@@ -311,7 +311,7 @@
             echo "<script>
             
             console.log(document.getElementById('demo'+'$file4->comment_id').offsetHeight)
-            
+            document.getElementById('arrow1'+'$file4->comment_id').style.height = document.getElementById('demo'+'$file4->comment_id').offsetHeight + 'px'
             </script>";
             }
         }

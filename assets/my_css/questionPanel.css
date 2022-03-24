@@ -305,7 +305,7 @@
 .content-container{
     width: 580px;
     float: left;
-    background-color: #1E90FF;
+    
    
     
 
@@ -316,7 +316,7 @@
     float: right;
     width: 400px;
     margin-right: 75px;
-    background-color: #f32121;
+    
    
 }
 
@@ -324,7 +324,7 @@
 .arrow1{
     width: 10px;
     
-    height: 100%;
+    
     margin-left: 69px;
     margin-top: 5px;
     
