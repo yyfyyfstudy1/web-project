@@ -52,16 +52,15 @@
     </div>
 </div>
 
-<!-- <?php
-$a=array("red","green");
-$b=array("test1","green");
-array_push($a,"blue","yellow",$b,$b);
-print_r($a);
-print_r($a[4][0]);
-?> -->
+
 
 
 <div style='width:1px;border:1px solid gray;float:left;height:520px;'><!--这个div模拟一条红色的垂直分割线--></div>
+
+
+
+
+
 <div class="middle-container" >
     <!-- 搜索框 -->
     <div class="input-group mb-3">
@@ -232,15 +231,11 @@ print_r($a[4][0]);
                <div class="rateButton3" id="'.$file3->answerId.'">
                <button type="submit" class="cancle_button">cancle</button>
                </div>
-
-
-
-               
+           
                
             </div>
         
 
-            
         
     </div>
     
@@ -253,16 +248,71 @@ print_r($a[4][0]);
         foreach ($files4 as $file4){
             if($file4->comment_ans_id == $file3->answerId){
                 echo '  
-            <div style="float:left; margin-top:15px">
-                <div class="commentInfo">
+           
+            <div class="comment_reply_Info">
                 <image src="'.base_url().'uploads_profile/'.$file4->avaterName.'" class="commentAvater"></image>
                 <div class="commentName">'.$file4->username.'</div>
                 <div style="float: left; background-color:yellow; margin-left:10px; margin-top:10px"><p style="font-weight:bold; font-size:14px">'.$file2->staff.'<p></div>
             </div>
-            <div class="comment_content">
-            '.$file4->comment_content.'
+             <div class="content-container">
+                
+                <image src="'.base_url().'assets/img/arrow1.png" class="arrow1"></image>    
+                
+                <div class="comment_reply_content" id="demo'.$file4->comment_id.'">
+                '.$file4->comment_content.'
+                </div>
+                
+               
             </div>
-            </div>';
+            
+            
+            <div class="rateButton4" id="'.$file4->comment_id.'">
+                <div class="question_content" id="div5'.$file4->comment_id.'" style="display:block;">
+
+                <image src="'.base_url().'assets/img/comment.png" width="20px" height="20px" style="float:left; margin-left:50px"></image>
+                    <h5 style="float:left; margin-left:8px">reply</h5> 
+                    
+            
+                </div>
+            </div>
+
+        <!-- 隐藏起来的评论的评论div -->
+        <div id="div6'.$file4->comment_id.'" style="display:none; " class="comment_comment_content">
+  
+             <image src="'.base_url().'assets/img/arrow2.png" class="arrow2"></image>    
+            <!-- 放置发布评论的富文本 -->
+            
+            <form action="'.base_url().'QuestionPanel/commentPost" method="post" id="postComment'.$file->queId.'">
+            <div style="margin-top:15px">
+                <image src="'.$user_Avater[0].'" class="comment_reply_Avater"></image>
+                <div class="rich_text4">
+                    <!-- 富文本编辑器 -->
+                    <textarea name="comment_content" id="myTextarea'.$file4->comment_id.'"></textarea>
+              
+                </div>
+              
+                
+            </div>
+           
+              <button  type="submit" class="post_button2">Post</button>
+           </form>
+            
+           <div class="rateButton5" id="'.$file4->comment_id.'">
+           <button type="submit" class="cancle_button2">cancle</button>
+           </div>
+       
+           
+        </div>
+            
+            
+            
+            
+            ';
+            echo "<script>
+            
+            console.log(document.getElementById('demo'+'$file4->comment_id').offsetHeight)
+            
+            </script>";
             }
         }
 
@@ -318,10 +368,13 @@ print_r($a[4][0]);
 
 
 <script>
+    var div = document.getElementById('demo32');
+        console.log(div.offsetHeight); // 224
     
 function myFunction(content)
 {
 
+    
     $("#hidden_input").attr("value",content);
 
 }
@@ -529,6 +582,111 @@ function myFunction(content)
         show_hidden(div4);
 
     });
+
+
+
+
+    // 拿到评论的评论
+    $('#fater_container').on('click', '.rateButton4', function(e){
+       
+        console.log($(this).attr('id'))
+        var div5 = document.getElementById("div5"+$(this).attr('id'));
+        var div6 = document.getElementById("div6"+$(this).attr('id'));
+
+        // show_hidden(div3);
+
+        show_hidden(div5);
+        show_hidden(div6);
+
+     tinymce.init({
+    selector: '#myTextarea'+$(this).attr('id'),
+    // plugins: 'image code',
+    //方向从左到右
+     directionality: 'ltr',
+     convert_urls: false,
+    plugins: [
+    'advlist autolink link image lists charmap preview hr anchor pagebreak spellchecker',
+    'searchreplace wordcount visualblocks visualchars code insertdatetime nonbreaking',
+    'save table contextmenu directionality template paste textcolor',
+    'codesample imageupload'
+    ],
+    toolbar: 'undo redo | image code',
+     //高度为400
+     height: 200,
+    statusbar: false,
+     width: '100%',
+    //工具栏的补丁按钮
+    toolbar:
+    'insertfile undo redo | \
+    styleselect | \
+    bold italic | \
+    alignleft aligncenter alignright alignjustify | \
+   ',
+
+     //字体大小
+    fontsize_formats: '10pt 12pt 14pt 18pt 24pt 36pt',
+    //按tab不换行
+    nonbreaking_force_tab: true,
+
+    // without images_upload_url set, Upload tab won't show up
+    images_upload_url: 'wtfk',
+    convert_urls : false,
+    // override default upload handler to simulate successful upload
+    images_upload_handler: function (blobInfo, success, failure) {
+        var xhr, formData;
+      
+        xhr = new XMLHttpRequest();
+        xhr.withCredentials = false;
+        xhr.open('POST', 'rich_Upload');
+      
+        xhr.onload = function() {
+            var json;
+        
+            if (xhr.status != 200) {
+                failure('HTTP Error: ' + xhr.status);
+                return;
+            }
+        
+            json = JSON.parse(xhr.responseText);
+        
+            if (!json || typeof json.location != 'string') {
+                failure('Invalid JSON: ' + xhr.responseText);
+                return;
+            }
+        
+            success(json.location);
+        };
+      
+        formData = new FormData();
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
+      
+        xhr.send(formData);
+    },
+});
+
+        return false;
+        
+    });
+
+
+    // 为cancle button绑定点击事件
+    $('#fater_container').on('click', '.rateButton5', function(e){
+       
+        var div5 = document.getElementById("div5"+$(this).attr('id'));
+        var div6 = document.getElementById("div6"+$(this).attr('id'));
+
+        // show_hidden(div3);
+
+        show_hidden(div5);
+        show_hidden(div6);
+
+    });
+
+
+
+
+
+
 
     
     // 为image添加放大效果

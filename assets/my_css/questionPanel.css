@@ -160,6 +160,12 @@
     padding-left: 15px;
 }
 
+.rich_text4{
+    float: left;
+    width: 440px;
+    padding-left: 15px;
+}
+
 .post_button { /* 按钮美化 */
 	width: 100px; /* 宽度 */
 	height: 40px; /* 高度 */
@@ -199,12 +205,55 @@
 }
 
 
+.post_button2 { /* 按钮美化 */
+	width: 90px; /* 宽度 */
+	height: 30px; /* 高度 */
+	border-width: 0px; /* 边框宽度 */
+	border-radius: 3px; /* 边框半径 */
+	background: #1E90FF; /* 背景颜色 */
+	cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+	outline: none; /* 不显示轮廓线 */
+	font-family: Microsoft YaHei; /* 设置字体 */
+	color: white; /* 字体颜色 */
+	font-size: 16px; /* 字体大小 */
+    float: right;
+    margin-right: 70px;
+    margin-top: 10px;
+}
+.post_button2:hover { /* 鼠标移入按钮范围时改变颜色 */
+	background: #5599FF;
+}
+
+.cancle_button2 { /* 按钮美化 */
+	width: 90px; /* 宽度 */
+	height: 30px; /* 高度 */
+	border-width: 0px; /* 边框宽度 */
+	border-radius: 3px; /* 边框半径 */
+	background: #f32121; /* 背景颜色 */
+	cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+	outline: none; /* 不显示轮廓线 */
+	font-family: Microsoft YaHei; /* 设置字体 */
+	color: rgb(255, 255, 255); /* 字体颜色 */
+	font-size: 16px; /* 字体大小 */
+    float: right;
+    margin-right: 16px;
+    margin-top: 10px;
+}
+.cancle_button2:hover { /* 鼠标移入按钮范围时改变颜色 */
+	background: #ff5757;
+}
+
+
+
+
 
 
 .commentInfo{
    
     margin-left: 50px;
     width: 300px;
+   margin-top: 15px;
+   z-index: 6;
    
 
 }
@@ -214,6 +263,16 @@
     height: 40px;
     border-radius: 50%;
     float: left;
+    z-index: 6;
+}
+
+.comment_reply_Avater{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    float: left;
+    margin-left: 5px;
+    z-index: 6;
 }
 
 .commentName{
@@ -222,14 +281,74 @@
     margin-top: 8px;
     color: rgb(247, 93, 3);
     font-size: 14px;
-    font-weight: bold
-
+    font-weight: bold;
+    z-index: 6;
+    
 }
 
 .comment_content{
-    width: 600px;
+    width: 480px;
     float: left;
    
-    margin-left: 95px;
+    margin-left: 100px;
+    
+    
+}
+
+.comment_reply_Info{
+    
+    margin-left: 50px;
+    width: 300px;
+   margin-top: 35px;
+   float: left;
+}
+.content-container{
+    width: 580px;
+    float: left;
+    background-color: #1E90FF;
+   
+    
 
 }
+
+.comment_reply_content{
+  
+    float: right;
+    width: 400px;
+    margin-right: 75px;
+    background-color: #f32121;
+   
+}
+
+
+.arrow1{
+    width: 10px;
+    
+    height: 100%;
+    margin-left: 69px;
+    margin-top: 5px;
+    
+
+
+  
+  float: left;
+    
+}
+
+.arrow2{
+    width: 30px;
+    height: 60px;
+  
+  float: left;
+  margin-left: 15px;
+    
+}
+
+
+.comment_comment_content{
+    width: 600px;
+    float: left;
+    margin-left: 50px;
+}
+
+
