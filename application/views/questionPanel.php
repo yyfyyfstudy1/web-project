@@ -217,7 +217,7 @@
                     <image src="'.$user_Avater[0].'" class="commentAvater"></image>
                     <div class="rich_text3">
                         <!-- 富文本编辑器 -->
-                        <textarea name="comment_content" id="myTextarea'.$file3->answerId.'"></textarea>
+                        <textarea name="comment_content" id="myTextarea1'.$file3->answerId.'"></textarea>
                         <input  name="commentQueID" type="hidden" value='.$file3->answerQueId.'>
                         <input  name="commentAnswerID" type="hidden" value='.$file3->answerId.'>
                     </div>
@@ -256,7 +256,7 @@
             </div>
              <div class="content-container">
                 
-                <image src="'.base_url().'assets/img/arrow1.png" class="arrow1" id ="arrow1'.$file4->comment_id.'"></image>    
+                <image src="'.base_url().'assets/img/arrow1.png" class="arrow1" id ="arrow1'.$file4->comment_id.'"  ></image>    
                 
                 <div class="comment_reply_content" id="demo'.$file4->comment_id.'">
                 '.$file4->comment_content.'
@@ -287,7 +287,9 @@
                 <image src="'.$user_Avater[0].'" class="comment_reply_Avater"></image>
                 <div class="rich_text4">
                     <!-- 富文本编辑器 -->
-                    <textarea name="comment_content" id="myTextarea'.$file4->comment_id.'"></textarea>
+                    <textarea name="comment_content" id="myTextarea2'.$file4->comment_id.'"></textarea>
+                    <input  name="commentQueID" type="hidden" value='.$file3->answerQueId.'>
+                    <input  name="commentAnswerID" type="hidden" value='.$file3->answerId.'>
               
                 </div>
               
@@ -312,6 +314,7 @@
             
             console.log(document.getElementById('demo'+'$file4->comment_id').offsetHeight)
             document.getElementById('arrow1'+'$file4->comment_id').style.height = document.getElementById('demo'+'$file4->comment_id').offsetHeight + 'px'
+            document.getElementById('arrow1'+'$file4->comment_id').style.visibility = 'hidden'
             </script>";
             }
         }
@@ -499,7 +502,7 @@ function myFunction(content)
         show_hidden(div4);
 
      tinymce.init({
-    selector: '#myTextarea'+$(this).attr('id'),
+    selector: '#myTextarea1'+$(this).attr('id'),
     // plugins: 'image code',
     //方向从左到右
      directionality: 'ltr',
@@ -583,7 +586,19 @@ function myFunction(content)
 
     });
 
+    function show_hidden2(obj) {
 
+        if (obj.style.visibility == 'visible') {
+
+            obj.style.visibility = 'hidden';
+
+        } else {
+
+            obj.style.visibility= 'visible';
+
+        }
+
+    }
 
 
     // 拿到评论的评论
@@ -593,13 +608,18 @@ function myFunction(content)
         var div5 = document.getElementById("div5"+$(this).attr('id'));
         var div6 = document.getElementById("div6"+$(this).attr('id'));
 
+        var arrow = document.getElementById("arrow1"+$(this).attr('id'));
+
+
+        show_hidden2(arrow)
+
         // show_hidden(div3);
 
         show_hidden(div5);
         show_hidden(div6);
 
      tinymce.init({
-    selector: '#myTextarea'+$(this).attr('id'),
+     selector: '#myTextarea2'+$(this).attr('id'),
     // plugins: 'image code',
     //方向从左到右
      directionality: 'ltr',
@@ -674,6 +694,11 @@ function myFunction(content)
        
         var div5 = document.getElementById("div5"+$(this).attr('id'));
         var div6 = document.getElementById("div6"+$(this).attr('id'));
+        var arrow = document.getElementById("arrow1"+$(this).attr('id'));
+
+
+        show_hidden2(arrow)
+
 
         // show_hidden(div3);
 

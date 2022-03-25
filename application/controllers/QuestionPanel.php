@@ -131,7 +131,7 @@ class QuestionPanel extends CI_Controller
 	}
 
 
-	//定义右侧问题展示的函数
+	//定义右侧展示的函数
 	public function showQuestion(){
 		
 		$this->load->model('file_model');	

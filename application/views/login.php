@@ -1,45 +1,4 @@
-<style>
-    .wrapper1 {
-  
-    position: relative;
-}
 
-.wrapper1:after {
-    display: block;
-    content: " ";
-    height: 0;
-    clear: both;
-}
-
-.content-container1 {
-    position: relative;
-    float: left;
-    vertical-align: top;
-    width: 200px;
-    text-align: left;
-    min-height: 100px;
-    padding-left: 20px;
-    z-index: 2;
-}
-
-.background1 {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 200px;
-    z-index: 1;
-}
-
-.bg_1 {
-    background-color: #eee;
-}
-
-.bg_2 {
-   
-    background-color: #aaa;
-    width: 10px
-}
-</style>
 <div class="container" style="margin-top:5%">
       <div class="col-4 offset-4">
 			<?php echo form_open(base_url().'login/check_login'); ?>
@@ -68,22 +27,4 @@
 	</div>
 </div>
 
-<div class="wrapper1">
-        <div class="background1 bg_1"></div>
-        <div class="content-container1">
-            
-            toooo big content<br/>
-            toooo big content<br/>
-            toooo big content<br/>
-            toooo big content<br/>
-            toooo big content<br/>
-			toooo big content<br/>
-            toooo big content<br/>
-            toooo big content<br/>
-            toooo big content<br/>
-                  
-        
-        </div>
-        <div class="background1 bg_2"></div>
 
-    </div>
