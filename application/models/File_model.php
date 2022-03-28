@@ -255,28 +255,66 @@
 
 
     //发布评论的函数
-    public function post_comment($comment_content , $commentQueID, $comment_ans_id, $commenter_name){
+    public function post_comment($comment_content , $commentQueID, $comment_ans_id,$comment_reply_id, $commenter_name){
         date_default_timezone_set('Asia/Shanghai');
          $data = array(
 
             'comment_content' => $comment_content,
             'comment_que_id' => $commentQueID,
             'comment_ans_id' => $comment_ans_id,
-            'comment_time' => date('Y-m-d H:i:s'),
+            'comment_reply_id'=>$comment_reply_id,
+            'comment_time' => date('Y-m-d H:i:s'),            
             'commenter_name'=>$commenter_name
             
            
 
         );
+
+
+        $data2 = array(
+
+            'copy_content' => $comment_content,
+            'copy_que_id' => $commentQueID,
+            'copy_answer_id' => $comment_ans_id,
+            'copy_reply_id'=>$comment_reply_id,
+            'copy_time' => date('Y-m-d H:i:s'),            
+            'copy_name'=>$commenter_name
+            
+           
+
+        );
          $this->db->insert('queboard_comments', $data);
+         $id = $this->db->insert_id();
+        if($comment_reply_id==0){
+
+            $data_id = array(
+                'comment_reply_id' => $id
+            
+             );
+        
+            $this -> db -> where ( 'comment_id' ,  $id ); 
+            $this->db->update('queboard_comments', $data_id);
+
+
+        }
+        
+         
+         $this->db->insert('que_comment_copy', $data2);
         
     }
+
+
+
+   
 
       //  获取指定评论的函数
       public function showComment(){
         $this->db->select("*");
         $this->db->from("queboard_comments");
         $this->db->join('users', 'users.username = queboard_comments.commenter_name');
+        
+        $this->db->join('que_comment_copy', 'que_comment_copy.copy_id = queboard_comments.comment_reply_id');
+      
         
         return $this->db->get();
        

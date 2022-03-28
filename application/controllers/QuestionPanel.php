@@ -335,7 +335,7 @@ class QuestionPanel extends CI_Controller
 				$queUseId = $this->input->post('commentQueID');
 				$answerContent =  $this->input->post('comment_content');
 				$commentAnswerId = $this->input->post('commentAnswerID');
-	
+				$comment_reply_id = $this->input->post('comment_reply_id');
 				// 先从cookie里获取分类的信息
 				$category = get_cookie('category');
 				
@@ -347,8 +347,9 @@ class QuestionPanel extends CI_Controller
 
 				$data3 = $this->file_model->showAnswer($queUseId);
 				
+				
 
-				$this->file_model->post_comment($answerContent, $queUseId, $commentAnswerId, $this->session->userdata('username') );
+				$this->file_model->post_comment($answerContent, $queUseId, $commentAnswerId,$comment_reply_id, $this->session->userdata('username') );
 				$data4 = $this->file_model->showComment();
 
 				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));

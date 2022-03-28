@@ -220,6 +220,7 @@
                         <textarea name="comment_content" id="myTextarea1'.$file3->answerId.'"></textarea>
                         <input  name="commentQueID" type="hidden" value='.$file3->answerQueId.'>
                         <input  name="commentAnswerID" type="hidden" value='.$file3->answerId.'>
+                        <input  name="comment_reply_id" type="hidden" value="0">
                     </div>
                   
                     
@@ -246,14 +247,35 @@
         ';
         // 下方打印评论内容
         foreach ($files4 as $file4){
-            if($file4->comment_ans_id == $file3->answerId){
+            if($file4->comment_ans_id == $file3->answerId ){
                 echo '  
            
             <div class="comment_reply_Info">
                 <image src="'.base_url().'uploads_profile/'.$file4->avaterName.'" class="commentAvater"></image>
                 <div class="commentName">'.$file4->username.'</div>
-                <div style="float: left; background-color:yellow; margin-left:10px; margin-top:10px"><p style="font-weight:bold; font-size:14px">'.$file2->staff.'<p></div>
+                <div style="float: left; background-color:yellow; margin-left:10px; margin-top:10px; width:40px; height:15px"><p style="font-weight:bold; font-size:14px">'.$file2->staff.'<p></div>
+
+               
+            ';
+
+            if($file4->copy_name != $file4->commenter_name){
+
+                echo ' 
+                <image src="'.base_url().'assets/img/reply1.png" style="float:left; margin-top:8px; margin-left:10px" height="20px"; width="20px"></image>
+                <div style="float:left; margin-left:10px; width:75px; margin-top:10px">
+                    <h5 color="gray">Replying To</h5>
+                </div>
+                
+                <p style="float:left; font-weight:bold; margin-top:7px; margin-left:8px; font-size:18px">'.$file4->copy_name.'</p>
+
+    
+             
+                ';
+            }
+
+            echo'
             </div>
+
              <div class="content-container">
                 
                 <image src="'.base_url().'assets/img/arrow1.png" class="arrow1" id ="arrow1'.$file4->comment_id.'"  ></image>    
@@ -274,7 +296,11 @@
                     
             
                 </div>
-            </div>
+            </div>';
+
+
+            echo'
+            
 
         <!-- 隐藏起来的评论的评论div -->
         <div id="div6'.$file4->comment_id.'" style="display:none; " class="comment_comment_content">
@@ -290,6 +316,7 @@
                     <textarea name="comment_content" id="myTextarea2'.$file4->comment_id.'"></textarea>
                     <input  name="commentQueID" type="hidden" value='.$file3->answerQueId.'>
                     <input  name="commentAnswerID" type="hidden" value='.$file3->answerId.'>
+                    <input  name="comment_reply_id" type="hidden" value='.$file4->comment_id.'>
               
                 </div>
               
@@ -316,7 +343,32 @@
             document.getElementById('arrow1'+'$file4->comment_id').style.height = document.getElementById('demo'+'$file4->comment_id').offsetHeight + 'px'
             document.getElementById('arrow1'+'$file4->comment_id').style.visibility = 'hidden'
             </script>";
+
+
+
+            
+            if($file4->copy_name != $file4->commenter_name){
+
+                echo'
+                
+                <div style="float:left; width:400px;background: #F3F3F3; margin-left:105px; margin-top:10px; padding:10px"> 
+
+                '.$file4->copy_content.'
+                
+                </div>
+                
+                
+                ';
+
+
             }
+
+
+
+            }
+
+
+
         }
 
     
