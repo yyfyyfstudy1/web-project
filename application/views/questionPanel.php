@@ -258,7 +258,7 @@
                
             ';
 
-            if($file4->copy_name != $file4->commenter_name){
+            if($file4->comment_id != $file4->comment_reply_id){
 
                 echo ' 
                 <image src="'.base_url().'assets/img/reply1.png" style="float:left; margin-top:8px; margin-left:10px" height="20px"; width="20px"></image>
@@ -347,7 +347,7 @@
 
 
             
-            if($file4->copy_name != $file4->commenter_name){
+            if($file4->comment_id != $file4->comment_reply_id){
 
                 echo'
                 
