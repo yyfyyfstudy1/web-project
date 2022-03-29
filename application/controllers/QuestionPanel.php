@@ -379,8 +379,57 @@ class QuestionPanel extends CI_Controller
 		}
 
 
+		// 评论提示功能的函数
+		function fetch(){
+			
+			$this->load->model('file_model');	
+			$username = $this->input->post('query');
+			$comment_data = $this->file_model->showComment();
+
+			foreach($comment_data->result() as $comment_use){
+
+				// 用户的评论被其他人评论了
+				if($comment_use->comment_reply_id != $comment_use->comment_id){
+
+
+					echo'
+					<div style="float:left; width:800px; margin-top:15px">
+						<div style="float:left; width:70px; height:80px; margin-left:15px">
+							<image src="'.base_url().'uploads_profile/'.$comment_use->avaterName.'" class="questionerAvater"></image>
+						</div>
+						<div style="float:left; width: 700px; height:80px; ">
+
+							<p style = "float:left; font-size:15px; font-weight:bold; width:200px;">
+								'.$comment_use->commenter_name.'
+								reply your comment
+							</p>
+							<div style="float:left; width:650px; margin-top:8px;">
+								<h5 >
+								'.$comment_use->comment_content.'
+								</h5>
+							</div>
+
+
+						</div>
+					</div>	
+					
+					';
+
+
+				}
+				
+
+					
+				
+
+			}
 
 		
+		
+		}
+
+
+
 
 
 	}

@@ -16,7 +16,6 @@ class Ajaxsearch extends CI_Controller {
  {
   $output = '';
   $query = '';
-  $yyf = 'http://localhost/ci/';
   
   $this->load->model('ajaxsearch_model');
   if($this->input->post('query'))

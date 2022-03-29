@@ -12,6 +12,7 @@
                 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/my_css/icon.css" />
             
         </head>
+
         <body >
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#" style="font-weight: bold; margin-left: 30px;">INFS4208</a>
@@ -36,6 +37,23 @@
         
         
   </div>
+
+  <!-- 提示有新消息功能 -->
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Mention</button>
+
+  <div class="offcanvas offcanvas-top h-auto" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+    <div class="offcanvas-header">
+      <h3 id="offcanvasTopLabel">New message</h3>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" >
+      
+      <div id="result"  style="height:500px;width:800px;overflow: auto;background:#EEEEEE; margin:auto"></div>
+    </div>
+  </div>
+              
+
+  
   
   <div style="margin-left: 38%;">
           <?php if(!$this->session->userdata('logged_in')) : ?>
@@ -85,5 +103,46 @@
   </div>
     
 </nav>
+
+
+  <script>
+
+  
+    // 发送轮询，查看是否次id有新的评论消息
+    function load_data(query)
+    {
+      $.ajax({
+      url:"<?php echo base_url(); ?>QuestionPanel/fetch",
+      method:"POST",
+      data:{query:query},
+      success:function(data){
+        $('#result').html(data);
+      }
+      })
+
+  
+    }
+
+    <?php 
+    
+    $username =  $this->session->userdata('username');
+    echo '
+    
+      window.onload = function(){
+        setInterval("load_data('.$username.')",100);//制作轮询（推技术）
+        
+    }
+ 
+    
+    ';
+    
+    ?>
+
+window.onload = function(){
+        setInterval("load_data('yyf')",100);//制作轮询（推技术）
+        
+    }    
+
+  </script>
 
 
