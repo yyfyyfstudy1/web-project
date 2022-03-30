@@ -385,13 +385,13 @@ class QuestionPanel extends CI_Controller
 			$this->load->model('file_model');	
 			$username = $this->input->post('query');
 			$comment_data = $this->file_model->showComment();
-
+			$i=0;
 			foreach($comment_data->result() as $comment_use){
-
+				
 				// 用户的评论被其他人评论了
-				if($comment_use->comment_reply_id != $comment_use->comment_id){
+				if($comment_use->comment_reply_id != $comment_use->comment_id and $comment_use->copy_name == $username){
 
-
+					$i = $i +1;
 					echo'
 					<div style="float:left; width:800px; margin-top:15px">
 						<div style="float:left; width:70px; height:80px; margin-left:15px">
@@ -418,13 +418,11 @@ class QuestionPanel extends CI_Controller
 
 				}
 				
-
-					
 				
 
 			}
 
-		
+			echo '<script>$("#number_use").html('.$i.');</script>';
 		
 		}
 

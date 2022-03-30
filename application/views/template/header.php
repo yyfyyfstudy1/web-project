@@ -52,7 +52,9 @@
     </div>
   </div>
               
+  <p id="number_use" style="float: left; font-size:16px; font-weight:bold; margin-left:10px; color:red"></p>
 
+  <p style="float: left; font-size:16px; font-weight:bold; margin-left:5px">Unread</p>
   
   
   <div style="margin-left: 38%;">
@@ -99,7 +101,7 @@
 
            <?php endif; ?>
   </div>
-
+             
   </div>
     
 </nav>
@@ -109,12 +111,12 @@
 
   
     // 发送轮询，查看是否次id有新的评论消息
-    function load_data(query)
+    function load_data()
     {
       $.ajax({
       url:"<?php echo base_url(); ?>QuestionPanel/fetch",
       method:"POST",
-      data:{query:query},
+      data:{query:"<?php echo $this->session->userdata('username') ?>"},
       success:function(data){
         $('#result').html(data);
       }
@@ -123,26 +125,30 @@
   
     }
 
-    <?php 
-    
-    $username =  $this->session->userdata('username');
-    echo '
-    
-      window.onload = function(){
-        setInterval("load_data('.$username.')",100);//制作轮询（推技术）
-        
-    }
- 
-    
-    ';
-    
-    ?>
+   
 
 window.onload = function(){
-        setInterval("load_data('yyf')",100);//制作轮询（推技术）
+        setInterval("load_data()",100);//制作轮询（推技术）
         
     }    
 
   </script>
 
 
+<?php 
+
+echo "
+
+
+
+
+
+
+
+"
+
+
+
+
+
+?>
