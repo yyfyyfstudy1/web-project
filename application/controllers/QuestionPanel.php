@@ -155,7 +155,10 @@ class QuestionPanel extends CI_Controller
 
 
 			$ID = $this->input->post('queId');
-
+			//如果用户是通过点击消息盒子调用函数，就更新评论阅读状态
+			if($this->input->post('commentId')){
+				$this->file_model->updateread($this->input->post('commentId'));
+			};
 			// 先从cookie里获取分类的信息
 			$category = get_cookie('category');
 
@@ -389,7 +392,7 @@ class QuestionPanel extends CI_Controller
 			foreach($comment_data->result() as $comment_use){
 				
 				// 用户的评论被其他人评论了
-				if($comment_use->comment_reply_id != $comment_use->comment_id and $comment_use->copy_name == $username){
+				if($comment_use->comment_reply_id != $comment_use->comment_id and $comment_use->copy_name == $username and $comment_use->readed != 'yes'){
 
 					$i = $i +1;
 					echo'
@@ -415,6 +418,7 @@ class QuestionPanel extends CI_Controller
 						</div>
 					</div>
 					<input  name="queId" type="hidden" value='.$comment_use->comment_que_id.'>
+					<input  name="commentId" type="hidden" value='.$comment_use->comment_id.'>
 
 					</form>
 					
@@ -449,10 +453,6 @@ class QuestionPanel extends CI_Controller
 		}
 
 
-		function test(){
-			$username = $this->input->post('username');
-			$this->load->view('questionPanel'); 
-		}
 
 
 	}

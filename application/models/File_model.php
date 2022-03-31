@@ -321,6 +321,18 @@
    }
 
 
+   public function updateread($commentId){
+       
+    $data = array(
+        'readed' => 'yes'
+    
+        );
+
+        $this->db->where('comment_id', $commentId);
+        $this->db->update('queboard_comments', $data);
+   }
+
+
 
 }
 
