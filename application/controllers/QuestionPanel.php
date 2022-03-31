@@ -392,7 +392,7 @@ class QuestionPanel extends CI_Controller
 			foreach($comment_data->result() as $comment_use){
 				
 				// 用户的评论被其他人评论了
-				if($comment_use->comment_reply_id != $comment_use->comment_id and $comment_use->copy_name == $username and $comment_use->readed != 'yes'){
+				if($comment_use->comment_reply_id != $comment_use->comment_id and $comment_use->copy_name == $username and $comment_use->readed != 'yes' and $comment_use->commenter_name != $comment_use->copy_name){
 
 					$i = $i +1;
 					echo'
