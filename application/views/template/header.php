@@ -47,8 +47,11 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body" >
-      
-      <div id="result"  style="height:500px;width:800px;overflow: auto;background:#EEEEEE; margin:auto"></div>
+      <!-- 放置新消息提示 -->
+      <div id="result"  style="height:500px;width:800px;overflow: auto;background:#EEEEEE; margin:auto">
+    
+    
+    </div>
     </div>
   </div>
               
@@ -108,7 +111,7 @@
 
 
   <script>
-
+  
   
     // 发送轮询，查看是否次id有新的评论消息
     function load_data()
@@ -125,10 +128,13 @@
   
     }
 
+ 
    
 
 window.onload = function(){
-        setInterval("load_data()",100);//制作轮询（推技术）
+         setInterval("load_data()",300);//制作轮询（推技术）
+
+        
         
     }    
 

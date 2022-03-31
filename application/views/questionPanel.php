@@ -39,7 +39,7 @@
     <div class="button-group">
     <button class="btn btn-primary" type="submit" style="width:170px" id="showHidden">New Thread</button>
     <h5 style="width:100px;  margin-top:15px; color:gray; font-weight:bold">CATEGORIES</h5>
-    <?php echo form_open(base_url().'QuestionPanel/filterQuestion'); ?>
+    <?php echo form_open(base_url()."QuestionPanel/filterQuestion"); ?>
 
     <button type="submit" class="btn btn-outline-primary"  value="general" name="category_filter" style="width:120px; margin-top:15px">General</button>
     <button type="submit" class="btn btn-outline-primary"  value="Lectures" name="category_filter" style="width:120px; margin-top:20px">Lectures</button>

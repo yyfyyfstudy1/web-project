@@ -393,7 +393,9 @@ class QuestionPanel extends CI_Controller
 
 					$i = $i +1;
 					echo'
-					<div style="float:left; width:800px; margin-top:15px">
+					<form action="'.base_url().'QuestionPanel/showQuestion" method="post" id="submitableimag'.$comment_use->comment_id.'">
+					
+					<div id="test'.$comment_use->comment_id.'" style="float:left; width:800px; margin-top:15px">
 						<div style="float:left; width:70px; height:80px; margin-left:15px">
 							<image src="'.base_url().'uploads_profile/'.$comment_use->avaterName.'" class="questionerAvater"></image>
 						</div>
@@ -411,10 +413,25 @@ class QuestionPanel extends CI_Controller
 
 
 						</div>
-					</div>	
+					</div>
+					<input  name="queId" type="hidden" value='.$comment_use->comment_que_id.'>
+
+					</form>
+					
+					<script>
+					$("#test'.$comment_use->comment_id.'").click(function(){
+						
+						$("#submitableimag"+'.$comment_use->comment_id.').submit();
+
+
+					});
+					</script>
+					
 					
 					';
 
+
+					
 
 				}
 				
@@ -422,12 +439,20 @@ class QuestionPanel extends CI_Controller
 
 			}
 
-			echo '<script>$("#number_use").html('.$i.');</script>';
+			echo '<script>
+			
+				$("#number_use").html('.$i.');
+
+		
+			</script>';
 		
 		}
 
 
-
+		function test(){
+			$username = $this->input->post('username');
+			$this->load->view('questionPanel'); 
+		}
 
 
 	}
