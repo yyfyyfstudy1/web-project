@@ -422,14 +422,7 @@ class QuestionPanel extends CI_Controller
 
 					</form>
 					
-					<script>
-					$("#test'.$comment_use->comment_id.'").click(function(){
-						
-						$("#submitableimag"+'.$comment_use->comment_id.').submit();
-
-
-					});
-					</script>
+				
 					
 					
 					';
@@ -438,8 +431,51 @@ class QuestionPanel extends CI_Controller
 					
 
 				}
+				// 回复的评论
+				// 如果replyId和commentId相等说明这条评论写在回复下方，通过与发送过来的username比对，筛选出复合的评论
+				if($comment_use->comment_reply_id == $comment_use->comment_id and $comment_use->answerUserName == $username and $comment_use->readed != 'yes'){
+					$i = $i +1;
+					echo'
+					<form action="'.base_url().'QuestionPanel/showQuestion" method="post" id="submitableimag'.$comment_use->comment_id.'">
+					
+					<div id="test'.$comment_use->comment_id.'" style="float:left; width:800px; margin-top:15px">
+						<div style="float:left; width:70px; height:80px; margin-left:15px">
+							<image src="'.base_url().'uploads_profile/'.$comment_use->avaterName.'" class="questionerAvater"></image>
+						</div>
+						<div style="float:left; width: 700px; height:80px; ">
+
+							<p style = "float:left; font-size:15px; font-weight:bold; width:200px;">
+								'.$comment_use->commenter_name.'
+								reply your comment
+							</p>
+							<div style="float:left; width:650px; margin-top:8px;">
+								<h5 >
+								'.$comment_use->comment_content.'
+								</h5>
+							</div>
+
+
+						</div>
+					</div>
+					<input  name="queId" type="hidden" value='.$comment_use->comment_que_id.'>
+					<input  name="commentId" type="hidden" value='.$comment_use->comment_id.'>
+
+					</form>					
+					';
+
+
+				}
 				
-				
+				echo'
+				<script>
+				$("#test'.$comment_use->comment_id.'").click(function(){
+					
+					$("#submitableimag"+'.$comment_use->comment_id.').submit();
+
+
+				});
+				</script>
+				';
 
 			}
 
@@ -451,6 +487,40 @@ class QuestionPanel extends CI_Controller
 			</script>';
 		
 		}
+
+
+
+
+		public function qq(){
+			$this->load->library('email');
+			$config['protocol'] = 'smtp';
+			$config['smtp_host'] = 'ssl://smtp.qq.com';
+			$config['smtp_user'] = '294006654@qq.com';
+			$config['smtp_pass'] = "mtfmbqvtpjhlbgje";//填写腾讯邮箱开启POP3/SMTP服务时的授权码，即核对密码正确
+			$config['smtp_port'] = 465;
+			$config['charset'] = 'utf-8';
+			$config['smtp_timeout'] = 30;
+			$config['mailtype'] = 'text';
+			$config['wordwrap'] = TRUE;
+			$config['crlf'] = PHP_EOL;
+			$config['newline'] = PHP_EOL;
+	  
+	  
+			$this->email->initialize($config);
+			$this->email->from('294006654@qq.com', '虞奕凡');
+			$this->email->to('2451785950@qq.com');
+			$this->email->cc('XXXXXXXX@qq.com');
+			$this->email->bcc('XXXXXXXX@qq.com');   
+			$this->email->subject('XXXXXXXX');
+			$this->email->message('XXXXXXXXXXXXXXXXXX！');
+			//echo $this->email->print_debugger();
+			//return $this->email->send();
+			if($this->email->send()){
+					echo 'yes';
+					}else{
+					echo $this->email->print_debugger();
+					}
+				}
 
 
 

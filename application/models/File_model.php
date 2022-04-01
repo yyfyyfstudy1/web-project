@@ -314,6 +314,7 @@
         $this->db->join('users', 'users.username = queboard_comments.commenter_name');
         
         $this->db->join('que_comment_copy', 'que_comment_copy.copy_id = queboard_comments.comment_reply_id');
+        $this->db->join('answer', 'answer.answerId = queboard_comments.comment_ans_id');
         $this->db->order_by('comment_id', 'ASC');
         
         return $this->db->get();

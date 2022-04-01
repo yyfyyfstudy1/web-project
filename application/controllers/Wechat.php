@@ -6,7 +6,7 @@ class Wechat extends CI_Controller {
  function index()
  {  
   if(!$this->session->userdata('logged_in')){
-    $this->load->view('template/header');
+    $this->load->view('template/header2');
   }else{
     $this->load->model('file_model');
     $img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
@@ -19,7 +19,7 @@ class Wechat extends CI_Controller {
  
          }
     $data_use['error'] = $var;
-    $this->load->view('template/header',$data_use);
+    $this->load->view('template/header2',$data_use);
   } 
    
     $this->load->view('wechat');
@@ -124,7 +124,7 @@ public function insert_record()
 {   
   
   if(!$this->session->userdata('logged_in')){
-    $this->load->view('template/header');
+    $this->load->view('template/header2');
   }else{
     $this->load->model('file_model');
     $img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
@@ -137,7 +137,7 @@ public function insert_record()
  
          }
     $data_use['error'] = $var;
-    $this->load->view('template/header',$data_use);
+    $this->load->view('template/header2',$data_use);
   } 
     $this->load->model('ajaxsearch_model');
 
@@ -174,7 +174,7 @@ public function insert_robot_record()
 {   
   
   if(!$this->session->userdata('logged_in')){
-    $this->load->view('template/header');
+    $this->load->view('template/header2');
   }else{
     $this->load->model('file_model');
     $img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
@@ -187,7 +187,7 @@ public function insert_robot_record()
  
          }
     $data_use['error'] = $var;
-    $this->load->view('template/header',$data_use);
+    $this->load->view('template/header2',$data_use);
   } 
     $this->load->model('ajaxsearch_model');
 
