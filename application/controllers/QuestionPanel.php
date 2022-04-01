@@ -197,7 +197,7 @@ class QuestionPanel extends CI_Controller
 		}
 
 
-	// 定义发布回复的函数
+		// 定义发布回复的函数
 	
 		public function postAnswer(){
 		
@@ -224,6 +224,8 @@ class QuestionPanel extends CI_Controller
 				
 				$queUseId = $this->input->post('queUseId');
 				$answerContent =  $this->input->post('answer_content');
+
+
 				
 	
 				// 先从cookie里获取分类的信息
@@ -235,7 +237,59 @@ class QuestionPanel extends CI_Controller
 	
 				$data2 = $this->file_model->showQuestion($queUseId);
 
+		
+
+
 				$data3 = $this->file_model->showAnswer($queUseId);
+
+					//定义发布邮件提醒提问者的功能
+					foreach($data3->result() as $data3_use){
+						
+						 $data_sets =  $this->file_model->takeUserInfo($data3_use ->userName);
+						if( $data3_use->answerUserName != $data3_use ->userName){
+						 foreach($data_sets->result() as $data_set){
+							//  echo $data_set->Email;
+							$this->load->library('email');
+							$config['protocol'] = 'smtp';
+							$config['smtp_host'] = 'ssl://smtp.qq.com';
+							$config['smtp_user'] = '294006654@qq.com';
+							$config['smtp_pass'] = "mtfmbqvtpjhlbgje";//填写腾讯邮箱开启POP3/SMTP服务时的授权码，即核对密码正确
+							$config['smtp_port'] = 465;
+							$config['charset'] = 'utf-8';
+							$config['smtp_timeout'] = 30;
+							$config['mailtype'] = 'text';
+							$config['wordwrap'] = TRUE;
+							$config['crlf'] = PHP_EOL;
+							$config['newline'] = PHP_EOL;
+					  
+					  
+							$this->email->initialize($config);
+							$this->email->from('294006654@qq.com', '虞奕凡');
+							$this->email->to($data_set->Email);
+							$this->email->cc('XXXXXXXX@qq.com');
+							$this->email->bcc('XXXXXXXX@qq.com');   
+							$this->email->subject('Your Question has been answerd');
+							$this->email->message($answerContent);
+							//echo $this->email->print_debugger();
+							//return $this->email->send();
+							if($this->email->send()){
+									
+									}else{
+									echo $this->email->print_debugger();
+									}
+
+
+
+						 }
+						}
+						 break;
+	
+					}
+
+
+				
+
+
 				$data4 = $this->file_model->showComment();
 
 				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
@@ -460,12 +514,6 @@ class QuestionPanel extends CI_Controller
 			
 				
 
-
-
-
-
-
-
 				$data4 = $this->file_model->showComment();
 
 				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
@@ -604,36 +652,36 @@ class QuestionPanel extends CI_Controller
 
 
 
-		public function qq(){
-			$this->load->library('email');
-			$config['protocol'] = 'smtp';
-			$config['smtp_host'] = 'ssl://smtp.qq.com';
-			$config['smtp_user'] = '294006654@qq.com';
-			$config['smtp_pass'] = "mtfmbqvtpjhlbgje";//填写腾讯邮箱开启POP3/SMTP服务时的授权码，即核对密码正确
-			$config['smtp_port'] = 465;
-			$config['charset'] = 'utf-8';
-			$config['smtp_timeout'] = 30;
-			$config['mailtype'] = 'text';
-			$config['wordwrap'] = TRUE;
-			$config['crlf'] = PHP_EOL;
-			$config['newline'] = PHP_EOL;
+		// public function qq(){
+		// 	$this->load->library('email');
+		// 	$config['protocol'] = 'smtp';
+		// 	$config['smtp_host'] = 'ssl://smtp.qq.com';
+		// 	$config['smtp_user'] = '294006654@qq.com';
+		// 	$config['smtp_pass'] = "mtfmbqvtpjhlbgje";//填写腾讯邮箱开启POP3/SMTP服务时的授权码，即核对密码正确
+		// 	$config['smtp_port'] = 465;
+		// 	$config['charset'] = 'utf-8';
+		// 	$config['smtp_timeout'] = 30;
+		// 	$config['mailtype'] = 'text';
+		// 	$config['wordwrap'] = TRUE;
+		// 	$config['crlf'] = PHP_EOL;
+		// 	$config['newline'] = PHP_EOL;
 	  
 	  
-			$this->email->initialize($config);
-			$this->email->from('294006654@qq.com', '虞奕凡');
-			$this->email->to('2451785950@qq.com');
-			$this->email->cc('XXXXXXXX@qq.com');
-			$this->email->bcc('XXXXXXXX@qq.com');   
-			$this->email->subject('XXXXXXXX');
-			$this->email->message('XXXXXXXXXXXXXXXXXX！');
-			//echo $this->email->print_debugger();
-			//return $this->email->send();
-			if($this->email->send()){
-					echo 'yes';
-					}else{
-					echo $this->email->print_debugger();
-					}
-				}
+		// 	$this->email->initialize($config);
+		// 	$this->email->from('294006654@qq.com', '虞奕凡');
+		// 	$this->email->to('2451785950@qq.com');
+		// 	$this->email->cc('XXXXXXXX@qq.com');
+		// 	$this->email->bcc('XXXXXXXX@qq.com');   
+		// 	$this->email->subject('XXXXXXXX');
+		// 	$this->email->message('XXXXXXXXXXXXXXXXXX！');
+		// 	//echo $this->email->print_debugger();
+		// 	//return $this->email->send();
+		// 	if($this->email->send()){
+		// 			echo 'yes';
+		// 			}else{
+		// 			echo $this->email->print_debugger();
+		// 			}
+		// 		}
 
 
 

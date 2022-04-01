@@ -231,6 +231,7 @@
         $this->db->select("*");
         $this->db->from("answer");
         $this->db->join('users', 'users.username = answer.answerUserName');
+        $this->db->join('question', 'question.queId = answer.answerQueId');
         $this->db->like('answerQueId', $id);
         return $this->db->get();
        
