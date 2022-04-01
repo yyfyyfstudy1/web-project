@@ -307,6 +307,7 @@
          $this->db->from("queboard_comments");
          $this->db->join('que_comment_copy', 'que_comment_copy.copy_id = queboard_comments.comment_reply_id');
          $this->db->join('users', 'users.username = que_comment_copy.copy_name');
+         $this->db->join('answer', 'answer.answerId = queboard_comments.comment_ans_id');
          $this->db->like('comment_id',  $id);
      
  
@@ -347,12 +348,10 @@
 
 
    //获取发送邮件所需要的用户信息的函数
-   public function takeCommenterInfo(){
+   public function takeUserInfo($userName){
         $this->db->select("*");
-        $this->db->from("queboard_comments");
-        $this->db->join('users', 'users.username = queboard_comments.commenter_name');
-        $this->db->join('que_comment_copy', 'que_comment_copy.copy_id = queboard_comments.comment_reply_id');
-        $this->db->like('comment_id', );
+        $this->db->from("users");
+        $this->db->like('username', $userName);
     
 
         return $this->db->get();

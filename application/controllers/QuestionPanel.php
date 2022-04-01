@@ -354,19 +354,20 @@ class QuestionPanel extends CI_Controller
 
 				$user_info_data = $this->file_model->post_comment($answerContent, $queUseId, $commentAnswerId,$comment_reply_id, $this->session->userdata('username') );
 
-				//如果评论的是评论
-				if($comment_reply_id!=0){
+				
 
 					
 					$info_querys = $user_info_data->result();
 
 					foreach($info_querys as $info_query){
 
-	
+						//判断此条评论是回复其他评论的
+					if($info_query->comment_id != $info_query->comment_reply_id){
 						
-						if($info_query->commenter_name !== $info_query->copy_name){
+						//判断不是回复自己
+						if($info_query->commenter_name != $info_query->copy_name){
 							//获取到被评论人的邮箱
-							//  $info_query->Email;
+							// echo $info_query->Email;
 
 							 $this->load->library('email');
 							 $config['protocol'] = 'smtp';
@@ -402,12 +403,62 @@ class QuestionPanel extends CI_Controller
 
 						}
 
+
+
+					}else{
+						// 如果此条评论是直接评论answer的
+						
+						
+						if($info_query->commenter_name != $info_query->answerUserName){
+						$data_sets =  $this->file_model->takeUserInfo($info_query->answerUserName);
+						foreach($data_sets->result() as $data_set){
+
+							// echo $data_set->Email;
+
+							$this->load->library('email');
+							$config['protocol'] = 'smtp';
+							$config['smtp_host'] = 'ssl://smtp.qq.com';
+							$config['smtp_user'] = '294006654@qq.com';
+							$config['smtp_pass'] = "mtfmbqvtpjhlbgje";//填写腾讯邮箱开启POP3/SMTP服务时的授权码，即核对密码正确
+							$config['smtp_port'] = 465;
+							$config['charset'] = 'utf-8';
+							$config['smtp_timeout'] = 30;
+							$config['mailtype'] = 'text';
+							$config['wordwrap'] = TRUE;
+							$config['crlf'] = PHP_EOL;
+							$config['newline'] = PHP_EOL;
+					  
+					  
+							$this->email->initialize($config);
+							$this->email->from('294006654@qq.com', '虞奕凡');
+							$this->email->to($data_set->Email);
+							$this->email->cc('XXXXXXXX@qq.com');
+							$this->email->bcc('XXXXXXXX@qq.com');   
+							$this->email->subject('someone comment your answer');
+							$this->email->message($info_query->comment_content);
+							//echo $this->email->print_debugger();
+							//return $this->email->send();
+							if($this->email->send()){
+									
+									}else{
+									echo $this->email->print_debugger();
+									}
+
+
+
+
+						}
+
+					}
+
+					}
+
 						
 
 					}
 
 			
-				}
+				
 
 
 
