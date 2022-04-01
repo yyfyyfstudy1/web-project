@@ -312,7 +312,7 @@ class QuestionPanel extends CI_Controller
 		}
 
 
-		// 定义发布回复评论的函数
+		// 定义发布评论的函数
 		public function commentPost(){
 			$this->load->model('file_model');	
 				
@@ -352,7 +352,69 @@ class QuestionPanel extends CI_Controller
 				
 				
 
-				$this->file_model->post_comment($answerContent, $queUseId, $commentAnswerId,$comment_reply_id, $this->session->userdata('username') );
+				$user_info_data = $this->file_model->post_comment($answerContent, $queUseId, $commentAnswerId,$comment_reply_id, $this->session->userdata('username') );
+
+				//如果评论的是评论
+				if($comment_reply_id!=0){
+
+					
+					$info_querys = $user_info_data->result();
+
+					foreach($info_querys as $info_query){
+
+	
+						
+						if($info_query->commenter_name !== $info_query->copy_name){
+							//获取到被评论人的邮箱
+							//  $info_query->Email;
+
+							 $this->load->library('email');
+							 $config['protocol'] = 'smtp';
+							 $config['smtp_host'] = 'ssl://smtp.qq.com';
+							 $config['smtp_user'] = '294006654@qq.com';
+							 $config['smtp_pass'] = "mtfmbqvtpjhlbgje";//填写腾讯邮箱开启POP3/SMTP服务时的授权码，即核对密码正确
+							 $config['smtp_port'] = 465;
+							 $config['charset'] = 'utf-8';
+							 $config['smtp_timeout'] = 30;
+							 $config['mailtype'] = 'text';
+							 $config['wordwrap'] = TRUE;
+							 $config['crlf'] = PHP_EOL;
+							 $config['newline'] = PHP_EOL;
+					   
+					   
+							 $this->email->initialize($config);
+							 $this->email->from('294006654@qq.com', '虞奕凡');
+							 $this->email->to($info_query->Email);
+							 $this->email->cc('XXXXXXXX@qq.com');
+							 $this->email->bcc('XXXXXXXX@qq.com');   
+							 $this->email->subject('There have someone comment you');
+							 $this->email->message($info_query->comment_content);
+							 //echo $this->email->print_debugger();
+							 //return $this->email->send();
+							 if($this->email->send()){
+									
+									 }else{
+									 echo $this->email->print_debugger();
+									 }
+
+
+
+
+						}
+
+						
+
+					}
+
+			
+				}
+
+
+
+
+
+
+
 				$data4 = $this->file_model->showComment();
 
 				$img_name = $this->file_model->print_img_profile($this->session->userdata('username'));
