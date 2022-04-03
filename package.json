@@ -1,0 +1,23 @@
+{
+  "name": "infs3202",
+  "version": "1.0.0",
+  "description": "What is CodeIgniter ###################",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yyfyyfstudy1/web-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yyfyyfstudy1/web-project/issues"
+  },
+  "homepage": "https://github.com/yyfyyfstudy1/web-project#readme",
+  "dependencies": {
+    "mjml": "^4.12.0"
+  }
+}

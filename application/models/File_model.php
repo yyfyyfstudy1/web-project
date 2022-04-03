@@ -359,6 +359,38 @@
    }
 
 
+   //发送邮件的函数
+   function sendEmail($emailAddress,$subject, $message){
+            $this->load->library('email');
+            $config['protocol'] = 'smtp';
+            $config['smtp_host'] = 'ssl://smtp.qq.com';
+            $config['smtp_user'] = '294006654@qq.com';
+            $config['smtp_pass'] = "mtfmbqvtpjhlbgje";//填写腾讯邮箱开启POP3/SMTP服务时的授权码，即核对密码正确
+            $config['smtp_port'] = 465;
+            $config['charset'] = 'utf-8';
+            $config['smtp_timeout'] = 30;
+            $config['mailtype'] = 'text';
+            $config['wordwrap'] = TRUE;
+            $config['crlf'] = PHP_EOL;
+            $config['newline'] = PHP_EOL;
+
+
+            $this->email->initialize($config);
+            $this->email->from('294006654@qq.com', 'Learner Team');
+            $this->email->to($emailAddress);
+            $this->email->cc('XXXXXXXX@qq.com');
+            $this->email->bcc('XXXXXXXX@qq.com');   
+            $this->email->subject($subject);
+            $this->email->message($message);
+            //echo $this->email->print_debugger();
+            //return $this->email->send();
+            if($this->email->send()){
+                    
+                    }else{
+                    echo $this->email->print_debugger();
+                    }
+   }
+
 
 }
 

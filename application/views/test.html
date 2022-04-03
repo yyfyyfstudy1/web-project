@@ -1,36 +1,125 @@
-<style>
-    .box{
-	width: 50%;
-	margin: 50px auto;
-}
-.img-box{
-	width: 100px;
-	position:relative;
-	z-index:1;
-}
-.img-box img{
-	position:absolute;
-	top:0;
-	bottom:0;
-	left:0;
-	right:0;
-	width:100%;
-	margin:auto;
-	z-index: -1;
-	*zoom:1;
-}
-.img-box:before {
-	content: "";
-	display: inline-block;
-	padding-bottom: 100%;
-	width: 0.1px;	/*必须要有数值，否则无法把高度撑起来*/
-	vertical-align: middle;
-}
-</style>
-<div class="box">
-	<span>行内元素垂直居中</span>
-	<div class="img-box">
-		<img src="data:image/jpeg;base64,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"/>
-        </div>
-</div>
-
+<mjml>
+	<mj-head>
+	  <mj-title>Discount Light</mj-title>
+	  <mj-preview>Pre-header Text</mj-preview>
+	  <mj-attributes>
+		<mj-all font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-all>
+		<mj-text font-weight="400" font-size="16px" color="#000000" line-height="24px" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-text>
+	  </mj-attributes>
+	  <mj-style inline="inline">.body-section {
+		-webkit-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+		-moz-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+		box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+		}</mj-style>
+	  <mj-style inline="inline">.text-link {
+		color: #5e6ebf
+		}</mj-style>
+	  <mj-style inline="inline">.footer-link {
+		color: #888888
+		}</mj-style>
+	</mj-head>
+	<mj-body background-color="#E7E7E7" width="600px">
+	  <mj-section full-width="full-width" background-color="#040B4F" padding-bottom="0px">
+		<mj-column width="100%">
+		  <mj-image src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153577/Email/Images/AnnouncementOffset/crofts-white.png" alt="" align="center" width="150px"></mj-image>
+		  <mj-text color="#ffffff" font-weight="bold" align="center" text-transform="uppercase" font-size="16px" letter-spacing="1px" padding-top="30px">Austin, TX
+			<br />
+			<span style="color: #979797; font-weight: normal">-</span>
+		  </mj-text>
+		  <mj-text color="#17CBC4" align="center" font-size="13px" padding-top="0" font-weight="bold" text-transform="uppercase" letter-spacing="1px" line-height="20px">Austin Convention Center
+			<br />
+			123 Main Street, 78701
+		  </mj-text>
+		  <mj-image src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544156968/Email/Images/AnnouncementOffset/header-top.png" width="600px" alt="" padding="0px" href="https://google.com"></mj-image>
+		</mj-column>
+	  </mj-section>
+	  <mj-section background-color="#1f2e78">
+		<mj-column width="100%">
+		  <mj-image src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544156968/Email/Images/AnnouncementOffset/header-bottom.png" width="600px" alt="" padding="0px" href="https://google.com"></mj-image>
+		</mj-column>
+	  </mj-section>
+	  <mj-wrapper padding-top="0" padding-bottom="0px" css-class="body-section">
+		<mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
+		  <mj-column width="100%">
+			<mj-text color="#212b35" font-weight="bold" font-size="20px">Croft's in Austin is opening December 20th</mj-text>
+			<mj-text color="#637381" font-size="16px">Hi Jane,</mj-text>
+			<mj-text color="#637381" font-size="16px">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia a assumenda nulla in quisquam optio quibusdam fugiat perspiciatis nobis, ad tempora culpa porro labore. Repudiandae accusamus obcaecati voluptatibus accusantium perspiciatis.</mj-text>
+			<mj-text color="#637381" font-size="16px">Tempora culpa porro labore. Repudiandae accusamus obcaecati voluptatibus accusantium perspiciatis:</mj-text>
+			<mj-text color="#637381" font-size="16px">
+			  <ul>
+				<li style="padding-bottom: 20px"><strong>Lorem ipsum dolor:</strong> Sit amet consectetur adipisicing elit.</li>
+				<li style="padding-bottom: 20px"><strong>Quia a assumenda nulla:</strong> Repudiandae accusamus obcaecati voluptatibus accusantium perspiciatis.</li>
+				<li><strong>Tempora culpa porro labore:</strong> In quisquam optio quibusdam fugiat perspiciatis nobis.</li>
+			  </ul>
+			</mj-text>
+			<mj-text color="#637381" font-size="16px" padding-bottom="30px">Lorem ipsum dolor <a class="text-link" href="https://google.com">sit amet consectetur</a> adipisicing elit. Earum eaque sunt nulla in, id eveniet quae unde ad ipsam ut, harum autem porro reiciendis minus libero illo. Vero, fugiat reprehenderit.</mj-text>
+			<mj-button background-color="#5e6ebf" align="center" color="#ffffff" font-size="17px" font-weight="bold" href="https://google.com" width="300px">RSVP Today</mj-button>
+			<mj-button background-color="#5e6ebf" align="center" color="#ffffff" font-size="17px" font-weight="bold" href="https://google.com" width="300px">Book an Appointment</mj-button>
+			<mj-text color="#637381" font-size="16px" padding-top="30px">Lorem ipsum dolor <a class="text-link" href="https://google.com">sit amet consectetur</a> adipisicing elit. Earum eaque sunt nulla in, id eveniet quae unde ad ipsam ut, harum autem porro reiciendis minus libero illo. Vero, fugiat reprehenderit.</mj-text>
+			<mj-text color="#637381" font-size="16px" padding-bottom="0px">Lorem ipsum dolor sit amet consectetur adipisicing elit.</mj-text>
+		  </mj-column>
+		</mj-section>
+		<mj-section background-color="#ffffff" padding-left="15px" padding-right="15px" padding-top="0">
+		  <mj-column width="50%">
+			<mj-image align="center" src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153577/Email/Images/AnnouncementOffset/Image_1.png" alt=""></mj-image>
+		  </mj-column>
+		  <mj-column width="50%">
+			<mj-image align="center" src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153578/Email/Images/AnnouncementOffset/Image_2.png" alt=""></mj-image>
+		  </mj-column>
+		</mj-section>
+		<mj-section background-color="#ffffff" padding-left="15px" padding-right="15px" padding-top="0">
+		  <mj-column width="100%">
+			<mj-divider border-color="#DFE3E8" border-width="1px"></mj-divider>
+		  </mj-column>
+		</mj-section>
+		<mj-section background-color="#ffffff" padding="0 15px 0 15px">
+		  <mj-column width="100%">
+			<mj-text color="#212b35" font-weight="bold" font-size="20px" padding-bottom="0px">Come see us!</mj-text>
+			<mj-text color="#637381" font-size="16px">We're looking forward to meeting you.</mj-text>
+		  </mj-column>
+		</mj-section>
+		<mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
+		  <mj-column width="50%">
+			<mj-text color="#212b35" font-size="12px" text-transform="uppercase" font-weight="bold" padding-bottom="0px">address</mj-text>
+			<mj-text color="#637381" font-size="14px" padding-top="0">Austin Convention Center
+			  <br />
+			  123 Main Street, 78701
+			</mj-text>
+		  </mj-column>
+		  <mj-column width="50%">
+			<mj-text color="#212b35" font-size="12px" text-transform="uppercase" font-weight="bold" padding-bottom="0px">Hours of Operation</mj-text>
+			<mj-text color="#637381" font-size="14px" padding-top="0">Monday, December 20th: 8:00AM - 5:00PM
+			  <br />
+			  Tuesday, December 21st: 8:00AM - 5:00PM
+			</mj-text>
+		  </mj-column>
+		</mj-section>
+		<mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
+		  <mj-column width="100%">
+			<mj-image src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153579/Email/Images/AnnouncementOffset/map.jpg" alt=""></mj-image>
+		  </mj-column>
+		</mj-section>
+	  </mj-wrapper>
+	  <mj-wrapper full-width="full-width">
+		<mj-section>
+		  <mj-column width="100%" padding="0px">
+			<mj-social font-size="15px" icon-size="30px" mode="horizontal" padding="0px" align="center">
+			  <mj-social-element name="facebook"></mj-social-element>
+			  <mj-social-element name="twitter"></mj-social-element>
+			  <mj-social-element name="google"></mj-social-element>
+			</mj-social>
+			<mj-text color="#445566" font-size="11px" font-weight="bold" align="center">View this email in your browser</mj-text>
+			<mj-text color="#445566" font-size="11px" align="center" line-height="16px">You are receiving this email advertisement because you registered with Croft's Accountants. (123 Main Street, Austin, TX 78701) and agreed to receive emails from us regarding new features, events and special offers.</mj-text>
+			<mj-text color="#445566" font-size="11px" align="center" line-height="16px">&copy; Croft's Accountants Inc., All Rights Reserved.</mj-text>
+		  </mj-column>
+		</mj-section>
+		<mj-section padding-top="0">
+		  <mj-group>
+			<mj-column width="100%" padding-right="0px">
+			  <mj-text color="#445566" font-size="11px" align="center" line-height="16px" font-weight="bold"><a class="footer-link" href="https://www.google.com">Privacy</a>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<a class="footer-link" href="https://www.google.com">Unsubscribe</a></mj-text>
+			</mj-column>
+		  </mj-group>
+		</mj-section>
+	  </mj-wrapper>
+	</mj-body>
+  </mjml>

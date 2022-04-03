@@ -225,7 +225,7 @@ class QuestionPanel extends CI_Controller
 				$queUseId = $this->input->post('queUseId');
 				$answerContent =  $this->input->post('answer_content');
 
-
+				$email_template='';
 				
 	
 				// 先从cookie里获取分类的信息
@@ -237,11 +237,8 @@ class QuestionPanel extends CI_Controller
 	
 				$data2 = $this->file_model->showQuestion($queUseId);
 
-		
-
-
 				$data3 = $this->file_model->showAnswer($queUseId);
-
+  				
 					//定义发布邮件提醒提问者的功能
 					foreach($data3->result() as $data3_use){
 						
@@ -249,34 +246,19 @@ class QuestionPanel extends CI_Controller
 						if( $data3_use->answerUserName != $data3_use ->userName){
 						 foreach($data_sets->result() as $data_set){
 							//  echo $data_set->Email;
-							$this->load->library('email');
-							$config['protocol'] = 'smtp';
-							$config['smtp_host'] = 'ssl://smtp.qq.com';
-							$config['smtp_user'] = '294006654@qq.com';
-							$config['smtp_pass'] = "mtfmbqvtpjhlbgje";//填写腾讯邮箱开启POP3/SMTP服务时的授权码，即核对密码正确
-							$config['smtp_port'] = 465;
-							$config['charset'] = 'utf-8';
-							$config['smtp_timeout'] = 30;
-							$config['mailtype'] = 'text';
-							$config['wordwrap'] = TRUE;
-							$config['crlf'] = PHP_EOL;
-							$config['newline'] = PHP_EOL;
-					  
-					  
-							$this->email->initialize($config);
-							$this->email->from('294006654@qq.com', '虞奕凡');
-							$this->email->to($data_set->Email);
-							$this->email->cc('XXXXXXXX@qq.com');
-							$this->email->bcc('XXXXXXXX@qq.com');   
-							$this->email->subject('Your Question has been answerd');
-							$this->email->message($answerContent);
-							//echo $this->email->print_debugger();
-							//return $this->email->send();
-							if($this->email->send()){
-									
-									}else{
-									echo $this->email->print_debugger();
-									}
+							$emailContent='<h2><span><em><strong>Hi&nbsp;'.$data3_use ->userName.'</strong></em></span></h2>
+							<h2><span style="color: #3598db;"><strong>Your question has been answerd&nbsp;</strong></span></h2>
+							<div><em>'.$answerContent.'</em></div>
+							<div>&nbsp;</div>
+							<div><hr /></div>
+							<div><em>Learner Team</em></div>
+							<div>&nbsp;</div>
+							<div><em>'.$data3_use ->answerPubTime.'</em></div>';
+
+							$subject = '"There have someone answer your Quetion"';
+
+							//调用邮件发送类
+							$this->file_model->sendEmail($data_set->Email, $subject, $emailContent);
 
 
 
@@ -408,8 +390,7 @@ class QuestionPanel extends CI_Controller
 
 				$user_info_data = $this->file_model->post_comment($answerContent, $queUseId, $commentAnswerId,$comment_reply_id, $this->session->userdata('username') );
 
-				
-
+	
 					
 					$info_querys = $user_info_data->result();
 
@@ -421,36 +402,9 @@ class QuestionPanel extends CI_Controller
 						//判断不是回复自己
 						if($info_query->commenter_name != $info_query->copy_name){
 							//获取到被评论人的邮箱
-							// echo $info_query->Email;
-
-							 $this->load->library('email');
-							 $config['protocol'] = 'smtp';
-							 $config['smtp_host'] = 'ssl://smtp.qq.com';
-							 $config['smtp_user'] = '294006654@qq.com';
-							 $config['smtp_pass'] = "mtfmbqvtpjhlbgje";//填写腾讯邮箱开启POP3/SMTP服务时的授权码，即核对密码正确
-							 $config['smtp_port'] = 465;
-							 $config['charset'] = 'utf-8';
-							 $config['smtp_timeout'] = 30;
-							 $config['mailtype'] = 'text';
-							 $config['wordwrap'] = TRUE;
-							 $config['crlf'] = PHP_EOL;
-							 $config['newline'] = PHP_EOL;
-					   
-					   
-							 $this->email->initialize($config);
-							 $this->email->from('294006654@qq.com', '虞奕凡');
-							 $this->email->to($info_query->Email);
-							 $this->email->cc('XXXXXXXX@qq.com');
-							 $this->email->bcc('XXXXXXXX@qq.com');   
-							 $this->email->subject('There have someone comment you');
-							 $this->email->message($info_query->comment_content);
-							 //echo $this->email->print_debugger();
-							 //return $this->email->send();
-							 if($this->email->send()){
-									
-									 }else{
-									 echo $this->email->print_debugger();
-									 }
+					
+							//发送邮件提示被评论者
+							$this->file_model->sendEmail($info_query->Email,  'There have someone comment you',  $info_query->comment_content);
 
 
 
@@ -467,36 +421,9 @@ class QuestionPanel extends CI_Controller
 						$data_sets =  $this->file_model->takeUserInfo($info_query->answerUserName);
 						foreach($data_sets->result() as $data_set){
 
-							// echo $data_set->Email;
+							// echo $data_set->Email; 
+							$this->file_model->sendEmail( $data_set->Email,  'someone comment your answer',  $info_query->comment_content);
 
-							$this->load->library('email');
-							$config['protocol'] = 'smtp';
-							$config['smtp_host'] = 'ssl://smtp.qq.com';
-							$config['smtp_user'] = '294006654@qq.com';
-							$config['smtp_pass'] = "mtfmbqvtpjhlbgje";//填写腾讯邮箱开启POP3/SMTP服务时的授权码，即核对密码正确
-							$config['smtp_port'] = 465;
-							$config['charset'] = 'utf-8';
-							$config['smtp_timeout'] = 30;
-							$config['mailtype'] = 'text';
-							$config['wordwrap'] = TRUE;
-							$config['crlf'] = PHP_EOL;
-							$config['newline'] = PHP_EOL;
-					  
-					  
-							$this->email->initialize($config);
-							$this->email->from('294006654@qq.com', '虞奕凡');
-							$this->email->to($data_set->Email);
-							$this->email->cc('XXXXXXXX@qq.com');
-							$this->email->bcc('XXXXXXXX@qq.com');   
-							$this->email->subject('someone comment your answer');
-							$this->email->message($info_query->comment_content);
-							//echo $this->email->print_debugger();
-							//return $this->email->send();
-							if($this->email->send()){
-									
-									}else{
-									echo $this->email->print_debugger();
-									}
 
 
 
