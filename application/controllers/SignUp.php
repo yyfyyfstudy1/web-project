@@ -78,8 +78,8 @@ class SignUp extends CI_Controller {
 			
 			$this->User_model->sendEmail($this->input->post('emailAddress'));
 
-			$data_use['message'] = "Please vertify your Email !!!!";
-			$this->load->view('signUp', $data_use);
+			$data_use['error'] ='<h1 style="text-align:central">You have been registered. Please vertify your Email !!!!</h1>';
+			$this->load->view('registerMessage' , $data_use);
 			
 
 			

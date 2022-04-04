@@ -20,7 +20,7 @@
 						<button type="submit" class="btn btn-primary btn-block" style="margin-left:30%">Log in with account</button>
 					</div>
 					<div class="form-group" style="margin-top: 10px;">
-						<button type="submit" class="btn btn-success" style="margin-left:30%">
+						<button type="submit" class="btn btn-warning" style="margin-left:30%">
 						<a href="<?php echo base_url()?>SignUp">Sign up and join Us</a>
 						
 						</button>
