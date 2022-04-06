@@ -31,6 +31,11 @@ class SignUp extends CI_Controller {
 	}
 
 
+
+		
+
+
+
 	public function user_sign_up(){
 		$this->load->helper(array('form','url'));
         $this->load->library(array('session', 'form_validation', 'email'));
@@ -63,23 +68,54 @@ class SignUp extends CI_Controller {
 			$this->load->view('template/header',$data_use);
 		} 
 
-		if ($this->form_validation->run() == FALSE)
+		if ($this->form_validation->run() == FALSE )
         {
             // fails
             $this->load->view('signUp');
         }else{
 
-			//如果格式验证成功的话
+			//如果格式验证成功的话，开始验证是否是人机
 
-			$emailAddress = $this->input->post('emailAddress');
-			$username = $this->input->post('username');
-			$password = $this->input->post('password');
-			$this->User_model->userRegister($emailAddress, $username, $password);
-			
-			$this->User_model->sendEmail($this->input->post('emailAddress'));
+			if($this->input->post('token')){
+				$data = array(
+					'secret' => '6Ld_SkofAAAAAKeDFiqiHMpdb01hQg4EPetkeFzE',
+					'response' => $this->input->post('token') // 接收用户提交的验证数据
+				);
+	
+				$result = self::send($data);
+				$result = json_decode($result, true);
+				$result = $result["success"];
+	
+				if($result == true){
+					echo '成功了'; 
+					// 验证成功，处理注册表单
 
-			$data_use['error'] ='<h1 style="text-align:central">You have been registered. Please vertify your Email !!!!</h1>';
-			$this->load->view('registerMessage' , $data_use);
+					$emailAddress = $this->input->post('emailAddress');
+					$username = $this->input->post('username');
+					$password = $this->input->post('password');
+					$this->User_model->userRegister($emailAddress, $username, $password);
+					
+					$this->User_model->sendEmail($this->input->post('emailAddress'));
+		
+					$data_use['error'] ='<h1 style="text-align:central">You have been registered. Please vertify your Email !!!!</h1>';
+					$this->load->view('registerMessage' , $data_use);
+
+
+					
+				}
+				else{
+					//人机验证失败
+					$data_use['error'] ='<h1 style="text-align:central">请验证不是机器人失败</h1>';
+					$this->load->view('registerMessage' , $data_use);
+				}
+			}
+			else{
+				$data_use['error'] ='<h1 style="text-align:central">请进行人机验证</h1>';
+				$this->load->view('registerMessage' , $data_use); // 用户没有提交到验证信息
+			}
+
+
+
 			
 
 			
@@ -109,6 +145,26 @@ class SignUp extends CI_Controller {
 			$this->load->view('registerMessage' , $data_use);
         }
     }
+
+
+	
+		// 发送验证信息
+		public static function send($post_data) {
+			$postdata = http_build_query($post_data);
+			$options = array(
+				'http' => array(
+					'method' => 'POST',
+					'header' => 'Content-type:application/x-www-form-urlencoded',
+					'content' => $postdata,
+					'timeout' => 15 * 60 // 超时时间
+				)
+			);
+			$context = stream_context_create($options);  
+			$result = file_get_contents("https://recaptcha.net/recaptcha/api/siteverify", false, $context);
+			return $result;
+		}
+
+	
 
 }
 ?>
