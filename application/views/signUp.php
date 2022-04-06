@@ -5,6 +5,7 @@
  .strengthLv1{background:red;height:6px;width:40px;}
  .strengthLv2{background:orange;height:6px;width:80px;}
  .strengthLv3{background:green;height:6px;width:120px;}
+
  </style>
 
 <h2 style="text-align: center; margin-top:30px"><span style="color: red;">Welcome</span><span style="color:blueviolet"> to</span>  <span style="color: greenyellow;">join</span> Us !!!</h2>
@@ -38,7 +39,7 @@
     </div>
     <input type="hidden" name="token" value="" id="tokenInput">
      <!-- 嵌入谷歌人机验证api -->
-    <div id="robot" style="width: 200px;"></div>
+    <div id="robot" class="mb-3" style="margin-left:100px;"></div>
     <button type="submit" class="btn btn-primary" style="margin-left:150px;">Submit</button>
     <button  class="btn btn-warning" style="margin-left: 30px;"><a href="<?php echo base_url()?>/Login">Login in</a></button>
 
@@ -117,7 +118,7 @@
     widgetId = grecaptcha.render('robot', {
         'sitekey': '6Ld_SkofAAAAAAxbTGobbPZptNwoP5d5TpLoWjQJ', 
         'theme': 'light',
-        'size': 'compact',
+        'size': 'normal',
         'callback': callback, 
         'expired-callback': expiredCallback, 
         'error-callback': errorCallback 
