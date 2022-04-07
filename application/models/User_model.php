@@ -60,10 +60,12 @@
 
     
        //activate user account
-       function verifyEmailID($key)
+       function verifyEmailID($key, $key2)
        {
            $data = array('status' => 1);
            $this->db->where('md5(Email)', $key);
+           $this->db->where('md5(password)', $key2);
+
            return $this->db->update('users', $data);
        }
 
@@ -83,10 +85,41 @@
 
        }
 
-       //发送让用户修改密码的邮件
-       function sendChangeEmail($email){
+       function takeOldPassword($username){
+        $this->db->select("*");
+        $this->db->where('username', $username);
+       $data =  $this->db->get('users')->result();
+       foreach($data as $use){
+            return $use->password;
+            break;
+       }
+       
 
-        $message = 'Dear User,<br /><br />Please click on the below activation link to upload your password.<br /><br /> '.base_url().'ForgetPassword/verify/' . md5($email) . '<br /><br /><br />Thanks<br />Mydomain Team';
+       }
+
+       function takeUpdateTime($email, $password){
+        $this->db->select("*");
+        $this->db->where('Email', $email);
+        $this->db->where('password', $password);
+        $data =  $this->db->get('users')->result();
+        foreach($data as $use){
+             return $use->updateTime;
+             break;
+        }
+       }
+
+       //发送让用户修改密码的邮件
+       function sendChangeEmail($email, $password){
+        
+        date_default_timezone_set("Asia/Shanghai");
+        // 更新账户更改的时间
+        $data = array('updateTime' => date('Y-m-d H:i:s'));
+        $this->db->where('Email', $email);
+        $this->db->where('password', $password);
+
+        $this->db->update('users', $data);
+
+        $message = 'Dear User,<br /><br />Please click on the below activation link to upload your password in 1 Hour.<br /><br /> '.base_url().'ForgetPassword/verify/' . md5($email) . '/'.md5($password).'<br /><br /><br />Thanks<br />Mydomain Team';
         $this->load->library('email');
         $config['protocol'] = 'smtp';
         $config['smtp_host'] = 'ssl://smtp.qq.com';
@@ -119,9 +152,10 @@
 
        }
        // 更像用户的密码
-       public function updateUserPassword($email, $password){
+       public function updateUserPassword($email, $oldPassword, $password){
         $data = array('password' => $password);
         $this->db->where('md5(Email)', $email);
+        $this->db->where('md5(password)', $oldPassword);
         return $this->db->update('users', $data);
        }
 }

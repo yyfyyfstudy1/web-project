@@ -15,3 +15,14 @@
 
     </div>
   <?php echo form_close(); ?>
+
+<?php   
+  if(isset($error)){
+
+    echo $error;
+
+  }
+
+
+
+?>

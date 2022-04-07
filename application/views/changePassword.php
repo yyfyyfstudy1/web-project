@@ -6,6 +6,7 @@
       <label for="exampleInputPassword1" class="form-label">Input with Your New Password</label>
       <input type="password" class="form-control" name="password">
       <input type="hidden" name="hash" value="<?php echo $hash; ?>">
+      <input type="hidden" name="hash2" value="<?php echo $hash2; ?>">
     </div>
 
     <button type="submit" class="btn btn-primary" style="margin-left:150px;">confirm</button>
