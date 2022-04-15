@@ -19,29 +19,9 @@
   
 
     <div id="result2"></div>
-    <?php 
-    
-        if($if_likes==0){
-            echo
-            '
-            <div id="alert_div">
-            <div class="alert alert-danger d-flex align-items-center" role="alert" style="margin-top:20px" >
-            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-            <div>
-            You have already liked this post
-            </div>
-          </div>
-          </div>
-            
-            
-            ';
-        }
-    
-    
-    ?>
 
 
-    <div class="all-container" id="ratings">
+    <div class="all-container">
    
      <!-- 此处用Ajax渲染文章列表 -->
     <div id="result1"></div>
@@ -61,9 +41,27 @@
     
     //页面刚加载的时候，发送Ajax请求获取推荐文章列表
     $(document).ready(function(){
-    
-    startAjax('recommend');
 
+
+    // 从cookie中获取用户上次浏览的位置
+     var flag = document.cookie.indexOf("category");
+     var flag2 = document.cookie.indexOf("scrollTop");
+     if (flag !== -1){
+        startAjax($.cookie('category'));
+     }else{
+        startAjax('recommend'); 
+     }
+    
+     
+    if(flag2 !== -1){
+        console.log($.cookie('scrollTop'))
+        console.log(result1.scrollTop)
+        result1.scrollTop = $.cookie('scrollTop');
+        alert('已经定位到你上次浏览的位置')
+
+    }
+    
+ 
     });
 
     // 退出当前页面储存用户浏览的信息
@@ -74,35 +72,31 @@
         
     });
 
-
-
-    // 通过代理获取相应的图片，提交相应的表单
-    $('#ratings').on('click', '.rateButton', function(e){
-        console.log($(this).attr('id'))
-        let formId = $(this).attr('id')
-        $('#'+formId).submit();
-    });
     
     
-   var timer;
+//    var timer;
 
-    $(function () {
+//     $(function () {
 
-    timer=setTimeout(function () {
+//     timer=setTimeout(function () {
 
-    $("#alert_div").hide();
+//     $("#result2222").hide();
 
-    }, 2000);
+//     }, 2000);
 
-    })
+//     })
    
     
     // 拿到按钮点击的value，再发送ajax请求
     function startAjax(value){
+
+        //先将得到的分类信息存入cookie，以便保存用户的浏览位置
+        $.cookie('category', value);
 			
         $.ajax({
         url:"<?php echo base_url(); ?>File_common/filterData",
         method:"POST",
+        async:false,
         data:{category:value},
         success:function(data){
             $('#result1').html(data);
